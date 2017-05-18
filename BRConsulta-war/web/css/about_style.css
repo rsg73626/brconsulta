@@ -1,0 +1,62 @@
+main{
+    width: 100%;
+    height: 87.5%;
+    position: relative;
+    top: 7.5%;
+    
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;;
+    align-items: center;
+}
+
+main hgroup{
+    width: 50%;
+    height: 20%;
+    text-align: center;
+    
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
+main div{
+    width: 75%;
+    height: 45%;
+    
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
+main div figure{
+    width: 30%;
+    height: 95%;
+    
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
+main div figure img{
+    width: 50%;
+    height: 50%;
+}
+
+main div figure figcaption{
+    width: 100%;
+    height: 30%;
+    text-align: center;
+}
+
+footer{
+    position: absolute;
+    bottom: 0;
+}
