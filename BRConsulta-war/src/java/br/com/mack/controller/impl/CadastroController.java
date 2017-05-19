@@ -21,16 +21,14 @@ import javax.naming.NamingException;
  *
  * @author Bruno
  */
-public class CadastroController extends AbstractController { 
+public class CadastroController extends AbstractController {
 
-    GenericDAO commonUserDAO = lookupCommonUserDAOLocal();
-    
-    
-    
+    CommonUserDAO commonUserDAO = lookupCommonUserDAOBean();
+
     @Override
     public void execute() {
         this.returnPage = "user_area/home.jsp";
-        
+
         String senha = request.getParameter("senha");
         String confirmacaoSenha = request.getParameter("conf_senha");
         CommonUser user = new CommonUser();
@@ -39,37 +37,37 @@ public class CadastroController extends AbstractController {
         user.setEmail(request.getParameter("email"));
         user.setUserName(request.getParameter("usuario"));
         user.setPassword(senha);
-        
+
         boolean erro = false;
         List<String> erros = new ArrayList();
-        
-        if(user.getFullName() == null){
+
+        if (user.getFullName() == null) {
             erro = true;
             erros.add("Preencha o campo NOME COMPLETO");
         }
-        if(user.getEmail() == null){
+        if (user.getEmail() == null) {
             erro = true;
             erros.add("Preencha o campo E-MAIL");
         }
-        if(user.getUserName() == null){
+        if (user.getUserName() == null) {
             erro = true;
             erros.add("Preencha o campo NOME DE USUÁRIO");
         }
-        if(user.getPassword() == null){
+        if (user.getPassword() == null) {
             erro = true;
             erros.add("Preencha o campo SENHA");
         }
-        if(!senha.equals(confirmacaoSenha)){
+        if (!senha.equals(confirmacaoSenha)) {
             erro = true;
             erros.add("Os campos SENHA e CONFIRMAÇÃO DE SENHA devem possuir valores iguais");
         }
-        
-        if(erro){
+
+        if (erro) {
             this.returnPage = "erro.jsp";
             this.request.getSession().setAttribute("errorMessages", erros);
             return;
         }
-        
+
         try {
             commonUserDAO.create(user);
             request.getSession().setAttribute("usuario", user);
@@ -80,16 +78,15 @@ public class CadastroController extends AbstractController {
             this.request.getSession().setAttribute("errorMessages", erros);
             this.returnPage = "erro.jsp";
         }
-    }   
+    }
 
-    private GenericDAO lookupCommonUserDAOLocal() {
+    private CommonUserDAO lookupCommonUserDAOBean() {
         try {
             Context c = new InitialContext();
-            return (GenericDAO) c.lookup("java:global/BRConsulta/BRConsulta-ejb/CommonUserDAO!br.com.mack.persistence.GenericDAO");
+            return (CommonUserDAO) c.lookup("java:global/BRConsulta/BRConsulta-ejb/CommonUserDAO!br.com.mack.persistence.CommonUserDAO");
         } catch (NamingException ne) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
             throw new RuntimeException(ne);
         }
     }
-
 }

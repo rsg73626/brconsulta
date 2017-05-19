@@ -7,6 +7,7 @@ package br.com.mack.persistence;
 
 import br.com.mack.persistence.entities.InstagramUser;
 import java.util.List;
+import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -16,17 +17,20 @@ import javax.persistence.PersistenceContextType;
  *
  * @author 31595472
  */
+@LocalBean
 @Stateless
 public class InstagramUserDAO implements GenericDAO<InstagramUser> {
 
     @PersistenceContext(unitName = "BRConsulta-ejbPU", type = PersistenceContextType.EXTENDED)
     private EntityManager em;
 
-       
-
     @Override
-    public void create(InstagramUser e) {
-        em.persist(e);
+    public void create(InstagramUser insta) {
+        try {
+            em.persist(insta);
+        } catch (Exception ex) {
+            throw new RuntimeException(ex);
+        }
     }
 
     @Override

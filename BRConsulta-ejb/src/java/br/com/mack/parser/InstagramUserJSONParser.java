@@ -8,6 +8,7 @@ package br.com.mack.parser;
 import br.com.mack.persistence.entities.InstagramUser;
 import br.com.mack.persistence.entities.User;
 import java.io.StringReader;
+import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.json.Json;
 import javax.json.JsonObject;
@@ -17,6 +18,7 @@ import javax.json.JsonReader;
  *
  * @author 31595472
  */
+@LocalBean
 @Stateless
 public class InstagramUserJSONParser implements JSONParser<User>{
 

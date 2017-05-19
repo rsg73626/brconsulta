@@ -21,6 +21,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
 import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonObject;
@@ -30,6 +32,8 @@ import javax.json.JsonReader;
  *
  * @author 41583469
  */
+@LocalBean
+@Stateless
 public class RestauranteParser {
 
     public static String openURL(String place) {

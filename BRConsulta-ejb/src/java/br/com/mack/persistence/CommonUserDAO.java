@@ -7,6 +7,7 @@ package br.com.mack.persistence;
 
 import br.com.mack.persistence.entities.CommonUser;
 import java.util.List;
+import javax.ejb.LocalBean;
 import javax.ejb.Stateful;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -17,13 +18,12 @@ import javax.persistence.Query;
  *
  * @author Bruno
  */
+@LocalBean
 @Stateful
 public class CommonUserDAO implements GenericDAO<CommonUser> {
 
     @PersistenceContext(unitName = "BRConsulta-ejbPU", type = PersistenceContextType.EXTENDED)
     private EntityManager em;
-
-      
 
     @Override
     public void create(CommonUser e) {

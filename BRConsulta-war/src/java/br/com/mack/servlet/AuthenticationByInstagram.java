@@ -30,18 +30,13 @@ import javax.servlet.http.HttpServletResponse;
  * @author 31595472
  */
 @WebServlet(name = "AuthenticationByInstagram", urlPatterns = {"/AuthenticationByInstagram"})
-public class AuthenticationByInstagram extends HttpServlet {    
+public class AuthenticationByInstagram extends HttpServlet {
 
-    @EJB
-    private JSONParser parser;
+    
+    private InstagramUserJSONParser parser = new InstagramUserJSONParser();
+    
+    private InstagramUserDAO dao = new InstagramUserDAO();
 
-    @EJB(beanInterface = InstagramUserDAO.class)
-    private GenericDAO dao;
-    
-    
-    
-    
-    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -77,7 +72,7 @@ public class AuthenticationByInstagram extends HttpServlet {
             conn.setRequestProperty("User-Agent", "Mozilla/5.0");
             conn.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
 
-            String redirect_uri = "http://localhost:8080/Restaurante/AuthenticationByInstagram";
+            String redirect_uri = "http://localhost:8080/BRConsulta-war/AuthenticationByInstagram";
             String urlParameters = "client_id=" + CLIENT_ID + "&client_secret=" + CLIENT_SECRET + "&code=" + code + "&grant_type=authorization_code&redirect_uri=" + redirect_uri;
             //String urlParameters = "client_id=" + CLIENT_ID + "&client_secret=" + CLIENT_SECRET + "&code=" + code + "&grant_type=public_content&redirect_uri=" + redirect_uri;
             conn.setDoOutput(true);
@@ -96,19 +91,21 @@ public class AuthenticationByInstagram extends HttpServlet {
                     resp.append(inputLine);
                 }
                 in.close();
-                
+
                 System.out.println("**********PRINTANDO DAO E PARSER**********");
                 System.out.println(dao);
                 System.out.println(parser);
-                
+
                 InstagramUser u = (InstagramUser) parser.parse(resp.toString());
+                u.setEmail("teste@teste.com");
+                u.setBirthday("1997-02-17");
                 System.out.println("*************USUARIO DO INSTAGRAM************");
                 System.out.println(u);
-                
-                if(((InstagramUserDAO)dao).readByInstagramId(u.getInstagramId()) == null){
+
+                if (((InstagramUserDAO) dao).readByInstagramId(u.getInstagramId()) == null) {
                     dao.create(u);
                 }
-                
+
                 request.getSession().setAttribute("usuario", u);
                 request.getSession().setAttribute("usuario_instagram", true);
                 request.getRequestDispatcher("user_area/home.jsp").forward(request, response);
@@ -120,6 +117,7 @@ public class AuthenticationByInstagram extends HttpServlet {
             request.getRequestDispatcher("error.jsp").forward(request, response);
         }
     }
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
