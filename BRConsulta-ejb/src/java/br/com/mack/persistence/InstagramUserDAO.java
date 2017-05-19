@@ -26,10 +26,12 @@ public class InstagramUserDAO implements GenericDAO<InstagramUser> {
 
     @Override
     public void create(InstagramUser insta) {
+        System.out.println(insta);
+        System.out.println(em != null);
         try {
             em.persist(insta);
         } catch (Exception ex) {
-            throw new RuntimeException(ex);
+           ex.printStackTrace();
         }
     }
 

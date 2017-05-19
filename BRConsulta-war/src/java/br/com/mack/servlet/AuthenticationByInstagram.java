@@ -101,8 +101,11 @@ public class AuthenticationByInstagram extends HttpServlet {
                 u.setBirthday("1997-02-17");
                 System.out.println("*************USUARIO DO INSTAGRAM************");
                 System.out.println(u);
-
-                if (((InstagramUserDAO) dao).readByInstagramId(u.getInstagramId()) == null) {
+                
+                InstagramUser usuario = ((InstagramUserDAO) dao).readByInstagramId(u.getInstagramId());
+                System.out.println("Usuário do Instagram: " + usuario);
+                if (usuario == null) {
+                    System.out.println(dao);
                     dao.create(u);
                 }
 

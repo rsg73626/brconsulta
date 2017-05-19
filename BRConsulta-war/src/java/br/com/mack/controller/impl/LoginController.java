@@ -21,7 +21,7 @@ import javax.naming.NamingException;
  */
 public class LoginController extends AbstractController{
 
-    GenericDAO commonUserDAO = lookupCommonUserDAOLocal();
+    CommonUserDAO commonUserDAO = (CommonUserDAO) lookupCommonUserDAOLocal();
 
     
 
@@ -45,7 +45,7 @@ public class LoginController extends AbstractController{
     private GenericDAO lookupCommonUserDAOLocal() {
         try {
             Context c = new InitialContext();
-            return (GenericDAO) c.lookup("java:global/BRConsulta/BRConsulta-ejb/CommonUserDAO!br.com.mack.persistence.GenericDAO");
+            return (GenericDAO) c.lookup("java:global/BRConsulta/BRConsulta-ejb/CommonUserDAO!br.com.mack.persistence.CommonUserDAO");
         } catch (NamingException ne) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
             throw new RuntimeException(ne);
