@@ -1,8 +1,6 @@
 package br.com.mack.servlet;
 
 import br.com.mack.parser.InstagramUserJSONParser;
-import br.com.mack.parser.JSONParser;
-import br.com.mack.persistence.GenericDAO;
 import br.com.mack.persistence.InstagramUserDAO;
 import br.com.mack.persistence.entities.InstagramUser;
 import java.io.BufferedReader;
@@ -13,12 +11,7 @@ import java.net.HttpURLConnection;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ejb.EJB;
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,10 +25,11 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "AuthenticationByInstagram", urlPatterns = {"/AuthenticationByInstagram"})
 public class AuthenticationByInstagram extends HttpServlet {
 
+    @EJB
+    private InstagramUserJSONParser parser;
     
-    private InstagramUserJSONParser parser = new InstagramUserJSONParser();
-    
-    private InstagramUserDAO dao = new InstagramUserDAO();
+    @EJB
+    private InstagramUserDAO dao;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -92,20 +86,10 @@ public class AuthenticationByInstagram extends HttpServlet {
                 }
                 in.close();
 
-                System.out.println("**********PRINTANDO DAO E PARSER**********");
-                System.out.println(dao);
-                System.out.println(parser);
-
                 InstagramUser u = (InstagramUser) parser.parse(resp.toString());
-                u.setEmail("teste@teste.com");
-                u.setBirthday("1997-02-17");
-                System.out.println("*************USUARIO DO INSTAGRAM************");
-                System.out.println(u);
                 
                 InstagramUser usuario = ((InstagramUserDAO) dao).readByInstagramId(u.getInstagramId());
-                System.out.println("Usuário do Instagram: " + usuario);
                 if (usuario == null) {
-                    System.out.println(dao);
                     dao.create(u);
                 }
 
