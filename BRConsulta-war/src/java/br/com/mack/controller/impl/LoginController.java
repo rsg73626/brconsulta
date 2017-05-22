@@ -19,12 +19,12 @@ import javax.naming.NamingException;
  *
  * @author 31595472
  */
-public class LoginController extends AbstractController{
+public class LoginController extends AbstractController{    
 
-    CommonUserDAO commonUserDAO = (CommonUserDAO) lookupCommonUserDAOLocal();
+    CommonUserDAO commonUserDAO = lookupCommonUserDAOBean();
 
     
-
+    
     @Override
     public void execute() {
         String usuario = request.getParameter("usuario");
@@ -40,16 +40,15 @@ public class LoginController extends AbstractController{
             this.returnPage = "erro.jsp";
             this.request.getSession().setAttribute("errorMessages", new String[]{"Usuário ou senha incorreto!"});
         }
-    }
+    }    
 
-    private GenericDAO lookupCommonUserDAOLocal() {
+    private CommonUserDAO lookupCommonUserDAOBean() {
         try {
             Context c = new InitialContext();
-            return (GenericDAO) c.lookup("java:global/BRConsulta/BRConsulta-ejb/CommonUserDAO!br.com.mack.persistence.CommonUserDAO");
+            return (CommonUserDAO) c.lookup("java:global/BRConsulta/BRConsulta-ejb/CommonUserDAO!br.com.mack.persistence.CommonUserDAO");
         } catch (NamingException ne) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
             throw new RuntimeException(ne);
         }
     }
-    
 }

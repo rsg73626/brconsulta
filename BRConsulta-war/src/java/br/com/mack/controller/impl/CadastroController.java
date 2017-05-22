@@ -25,6 +25,8 @@ public class CadastroController extends AbstractController {
 
     CommonUserDAO commonUserDAO = lookupCommonUserDAOBean();
 
+    
+
     @Override
     public void execute() {
         this.returnPage = "user_area/home.jsp";
