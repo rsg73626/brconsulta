@@ -22,7 +22,7 @@ import javax.persistence.Query;
 @Stateful
 public class CommonUserDAO implements GenericDAO<CommonUser> {
 
-    @PersistenceContext(unitName = "BRConsulta-ejbPU", type = PersistenceContextType.EXTENDED)
+    @PersistenceContext(name = "BRConsulta-ejbPU")
     private EntityManager em;
 
     @Override
