@@ -4,23 +4,17 @@
 <link href="css/signup_style.css" rel="stylesheet" type="text/css"/>
 <main>
     <form action="FrontController" method="POST">
-        <label for="nome_completo">Nome Completo: </label>
-        <input type="text" required="required" id="nome_completo" name="nome_completo">
+        <input type="text" required="required" id="nome_completo" name="nome_completo" placeholder="Nome Completo">
 
-        <label for="dt_nasc">Data de Nascimento: </label>
-        <input type="date" required="required" id="dt_nasc" name="dt_nasc">
+        <input type="date" required="required" id="dt_nasc" name="dt_nasc" placeholder="Data de Nascimento">
 
-        <label for="email">E-mail: </label>
-        <input type="email" required="required" id="email" name="email">
+        <input type="email" required="required" id="email" name="email" placeholder="E-mail">
 
-        <label for="usuario">Nome de Usuário: </label>
-        <input type="text" required="required" id="usuario" name="usuario">
+        <input type="text" required="required" id="usuario" name="usuario" placeholder="Nome de Usuário">
 
-        <label for="senha">Senha: </label>
-        <input type="password" required="required" id="senha" name="senha">
+        <input type="password" required="required" id="senha" name="senha" placeholder="Senha">
 
-        <label for="conf_senha">Confirmarção de Senha: </label>
-        <input type="password" required="required" id="conf_senha" name="conf_senha">
+        <input type="password" required="required" id="conf_senha" name="conf_senha" placeholder="Confirmação de Senha">
 
         <input type="hidden" name="ctrl" value="Cadastro"/>
 
@@ -30,7 +24,7 @@
     ou
     
         <a href="https://api.instagram.com/oauth/authorize/?client_id=1631b13910b44f0a8b95f3c96b061470&redirect_uri=http://localhost:8080/BRConsulta-war/AuthenticationByInstagram&response_type=code">
-            <button>Instagram</button>
+            <button>INSTAGRAM</button>
     </a>
 </main>
 

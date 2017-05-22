@@ -5,11 +5,9 @@
 
 <main>
     <form method="post" action="FrontController">
-        <label for="usuario">Nome de Usuário: </label>
-        <input type="text" required="required" id="usuario" name="usuario">
+        <input type="text" required="required" id="usuario" name="usuario" placeholder="Nome de Usuário">
 
-        <label for="senha">Senha: </label>
-        <input type="password" required="required" id="senha" name="senha">
+        <input type="password" required="required" id="senha" name="senha" placeholder="Senha">
         
         <input type="hidden" name="ctrl" value="Login"/>
         

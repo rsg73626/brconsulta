@@ -1,6 +1,13 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
-<c:import url="/template/header.jsp"/>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:choose>
+    <c:when test="${usuario == null}">
+        <c:import url="/template/header.jsp"/>        
+    </c:when>
+    <c:otherwise>
+        <c:import url="/template/header_post_login.jsp"/>      
+    </c:otherwise>    
+</c:choose>
 <link href="css/about_style.css" rel="stylesheet" type="text/css"/>
 
 <main>

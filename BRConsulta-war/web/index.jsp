@@ -19,7 +19,7 @@
                     <h1>Título descritivo</h1>
                     <h3>Descrição detalhada</h3>
                     
-                    <a href="" title="Registre-se em nosso site.">Registrar-se</a>
+                    <a href="signup.jsp" title="Registre-se em nosso site.">Registrar-se</a>
                 </hgroup>
             </article>
             <article>
