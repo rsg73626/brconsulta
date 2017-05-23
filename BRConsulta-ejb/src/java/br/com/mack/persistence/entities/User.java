@@ -75,6 +75,10 @@ public abstract class User implements Serializable{
     public Date getBirthday() {
         return birthday;
     }
+    
+    public String getBirthdayAsString(){
+        return new SimpleDateFormat("dd/MM/yyyy").format(birthday);
+    }
 
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
