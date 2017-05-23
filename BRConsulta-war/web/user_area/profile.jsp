@@ -2,6 +2,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <c:import url="/template/header_post_login.jsp"/>
 <link href="<c:url value="/css/profile.css"/>" rel="stylesheet" type="text/css"/>
+
 <main>
     <form action="" method="POST">
         <label for="nome_completo">Nome Completo: </label>
