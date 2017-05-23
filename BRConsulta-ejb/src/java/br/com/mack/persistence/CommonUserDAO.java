@@ -48,7 +48,7 @@ public class CommonUserDAO implements GenericDAO<CommonUser> {
 
     @Override
     public void update(CommonUser e) {
-        em.persist(e);
+        em.persist(em.merge(e));
     }
 
     @Override

@@ -27,7 +27,7 @@ public class UpdateInstagramProfileController extends AbstractController {
     @Override
     public void execute() {
         String fullName = this.request.getParameter("nome_completo");
-        String birthday = this.request.getParameter("birthday");
+        String birthday = this.request.getParameter("dt_nasc");
         String email = this.request.getParameter("email");
 
         if (fullName != null && birthday != null && email != null) {
@@ -39,7 +39,7 @@ public class UpdateInstagramProfileController extends AbstractController {
 
             instagramUserDAO.update(usuario);
 
-            this.returnPage = "profile.jsp";
+            this.returnPage = "user_area/profile.jsp";
         } else {
             List<String> erros = new ArrayList();
             if (fullName == null) {
@@ -53,7 +53,7 @@ public class UpdateInstagramProfileController extends AbstractController {
                 erros.add("Preencha o campo \"E-mail\"!");
 
             }
-            this.request.getSession().setAttribute("erroMessages", erros);
+            this.request.getSession().setAttribute("errorMessages", erros);
             this.returnPage = "erro.jsp";
         }
 

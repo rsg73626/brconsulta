@@ -28,10 +28,10 @@ public class UpdateCommonProfileController extends AbstractController {
     @Override
     public void execute() {
         String fullName = this.request.getParameter("nome_completo");
-        String birthday = this.request.getParameter("birthday");
+        String birthday = this.request.getParameter("dt_nasc");
         String email = this.request.getParameter("email");
         String senha = this.request.getParameter("senha");
-        String confirmacaoSenha = this.request.getParameter("confirmacao_senha");
+        String confirmacaoSenha = this.request.getParameter("conf_senha");
 
         if (fullName != null && birthday != null && email != null && senha != null && confirmacaoSenha != null && senha.equals(confirmacaoSenha)) {
             CommonUser usuario = (CommonUser) this.request.getSession().getAttribute("usuario");
@@ -43,7 +43,7 @@ public class UpdateCommonProfileController extends AbstractController {
             
             commonUserDAO.update(usuario);
             
-            this.returnPage = "profile.jsp";
+            this.returnPage = "user_area/profile.jsp";
         } else {
             List<String> erros = new ArrayList();
             if (fullName == null) {
@@ -69,7 +69,7 @@ public class UpdateCommonProfileController extends AbstractController {
                 erros.add("Os campos \"Senha\" e \"Confirmação de Senha\" devem ser iguais!");
 
             }
-            this.request.getSession().setAttribute("erroMessages", erros);
+            this.request.getSession().setAttribute("errorMessages", erros);
             this.returnPage = "erro.jsp";
         }
 
