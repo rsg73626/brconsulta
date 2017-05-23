@@ -2,7 +2,9 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <c:import url="/template/header.jsp"/>
 <link href="css/signin_style.css" rel="stylesheet" type="text/css"/>
-
+<head>
+    <meta charset="UTF-8">
+</head>
 <main>
     <form method="post" action="FrontController">
         <input type="text" required="required" id="usuario" name="usuario" placeholder="Nome de Usuário">

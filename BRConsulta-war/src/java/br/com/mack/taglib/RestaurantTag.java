@@ -35,8 +35,17 @@ public class RestaurantTag extends SimpleTagSupport {
             for (Restaurant restaurant : items) {
                 out.println("<div id='bloco'>"
                         + "<div id=\"description\"><h1>" + restaurant.getName() + "</h1><h3>Endereço</h3><p>" + restaurant.getLocation().getAddress() + "</p></div>"
-                        + "<div id=\"foto\"><img src=" + restaurant.getImage() + "></div>"
-                        + "</div><c:url/><a href=\""+context+"\">Show</h1>");
+                        + "<div id=\"foto\"><img src=" + restaurant.getImage() + "></div>");                
+
+                out.print("<form method=\"post\" action=\""+context+"/FrontController\">\n" +
+"    <input type=\"text\" hidden name=\"name\" value=\""+restaurant.getName().replace("\"", "")+"\">\n" +
+"    <input type=\"text\" hidden name=\"imagem\" value=\""+restaurant.getImage().replace("\"", "")+"\">\n" +
+"    <input type=\"text\" hidden name=\"url\" value=\""+restaurant.getUrl().replace("\"", "")+"\">\n" +
+"    <input type=\"text\" hidden name=\"city\" value=\""+restaurant.getLocation().getCity()+"\">\n" +
+"    <input type=\"text\" hidden name=\"address\" value=\""+restaurant.getLocation().getAddress()+"\">\n" +
+"    <input type hidden name=\"ctrl\" value=\"Favorito\">\n"
+        + "<input type=\"submit\" value=\"Salvar Favorito\">" +
+"</form></div>");
             }
 //            out.print("<h1>Hello World!</h1>");
         } catch (IOException ex) {

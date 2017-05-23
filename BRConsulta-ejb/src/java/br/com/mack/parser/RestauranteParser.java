@@ -90,9 +90,6 @@ public class RestauranteParser implements JSONParser<List<Restaurant>> {
             restList.add(r);
 
         }
-        for (Restaurant restaurant : restList) {
-            System.out.println(restaurant);
-        }
         return restList;
     }
 }

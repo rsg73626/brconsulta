@@ -24,9 +24,6 @@ public class SearchRestaurantController extends AbstractController {
         String content = RestauranteParser.openURL(location.replace(" ", "+"));
 
         ArrayList<Restaurant> rs = (ArrayList< Restaurant>) restaurante.parse(content);
-        for (Restaurant r : rs) {
-            System.out.println(r);
-        }
         request.getSession().setAttribute("restaurants", rs);
         returnPage = "user_area/home.jsp";
     }

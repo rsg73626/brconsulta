@@ -10,8 +10,12 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.ejb.Local;
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -30,19 +34,22 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "Usuario")
 @Inheritance(strategy = InheritanceType.JOINED)//Uma tabela para cada classe (incluindo a abstrata)
-public abstract class User implements Serializable{
+@Local
+public abstract class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    
+
+    private List<Restaurant> restaurants;
+
     private String fullName;
-    
+
     @Temporal(TemporalType.DATE)
     private Date birthday;
-    
+
     private String email;
-    
+
     @Column(unique = true)
     private String userName;
 
@@ -95,7 +102,7 @@ public abstract class User implements Serializable{
     public void setUserName(String userName) {
         this.userName = userName;
     }
-    
+
     public void setBirthday(String birthday) {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         try {
@@ -103,13 +110,22 @@ public abstract class User implements Serializable{
         } catch (ParseException ex) {
             Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }    
+    }
 
+    public List<Restaurant> getRestaurants() {
+        return restaurants;
+    }
+
+    public void setRestaurants(List<Restaurant> restaurants) {
+        this.restaurants = restaurants;
+    }
+
+    public void addRestaurant(Restaurant r){
+        this.restaurants.add(r);
+    }
     @Override
     public String toString() {
         return "User{" + "id=" + id + ", fullName=" + fullName + ", birthday=" + birthday + ", email=" + email + ", userName=" + userName + '}';
     }
-    
-    
 
 }
