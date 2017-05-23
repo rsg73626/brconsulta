@@ -66,13 +66,4 @@ public class CommonUserDAO implements GenericDAO<CommonUser> {
             return null;
         }
     }
-
-    public void persist(Object object) {
-        em.persist(object);
-    }
-
-    public void persist1(Object object) {
-        em.persist(object);
-    }
-
 }

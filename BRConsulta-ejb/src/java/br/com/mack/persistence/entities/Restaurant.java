@@ -1,11 +1,13 @@
 package br.com.mack.persistence.entities;
 
 import java.io.Serializable;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author 41583469
  */
+@XmlRootElement
 public class Restaurant implements Serializable {
 
     private String name;
