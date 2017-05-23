@@ -17,7 +17,7 @@
             <input type="password" required="required" id="conf_senha" name="conf_senha" placeholder="Confirmação de Senha" title="Confirmação de Senha">
         </c:if>
 
-        <input type="hidden" name="ctrl" value="UpdateProfile"/>
+        <input type="hidden" name="ctrl" value="Update${(usuario_instagram != null)?'Instagram':'Common'}Profile"/>
 
         <input type="submit" value="ALTERAR">
     </form>
