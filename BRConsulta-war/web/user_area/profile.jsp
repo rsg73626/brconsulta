@@ -2,6 +2,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:import url="/template/header_post_login.jsp"/>
 <link href="<c:url value="/css/profile.css"/>" rel="stylesheet" type="text/css"/>
+
 <main>
     <form action="${pageContext.request.contextPath}/FrontController" method="POST">
         <input type="text" required="required" id="nome_completo" name="nome_completo" value="${usuario.fullName}" title="Nome completo">
