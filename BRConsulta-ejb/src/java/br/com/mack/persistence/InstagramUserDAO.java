@@ -55,7 +55,7 @@ public class InstagramUserDAO implements GenericDAO<InstagramUser> {
 
     @Override
     public void update(InstagramUser e) {
-        em.persist(e);
+        em.persist(em.merge(e));
     }
 
     @Override

@@ -83,6 +83,12 @@ public abstract class User implements Serializable {
         return birthday;
     }
 
+    public String getBirthdayAsString() {
+        if(birthday != null)
+            return new SimpleDateFormat("dd/MM/yyyy").format(birthday);
+        return "";
+    }
+
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
     }
@@ -120,9 +126,10 @@ public abstract class User implements Serializable {
         this.restaurants = restaurants;
     }
 
-    public void addRestaurant(Restaurant r){
+    public void addRestaurant(Restaurant r) {
         this.restaurants.add(r);
     }
+
     @Override
     public String toString() {
         return "User{" + "id=" + id + ", fullName=" + fullName + ", birthday=" + birthday + ", email=" + email + ", userName=" + userName + '}';
