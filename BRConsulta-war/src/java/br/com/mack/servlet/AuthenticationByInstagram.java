@@ -27,7 +27,7 @@ public class AuthenticationByInstagram extends HttpServlet {
 
     @EJB
     private InstagramUserJSONParser parser;
-    
+
     @EJB
     private InstagramUserDAO dao;
 
@@ -87,13 +87,20 @@ public class AuthenticationByInstagram extends HttpServlet {
                 in.close();
 
                 InstagramUser u = (InstagramUser) parser.parse(resp.toString());
-                
+
                 InstagramUser usuario = ((InstagramUserDAO) dao).readByInstagramId(u.getInstagramId());
+                String profilePic = u.getProfilePicture();
+                String accesToken = u.getAccessToken();
                 if (usuario == null) {
                     dao.create(u);
+                    u.setProfilePicture(profilePic);
+                    u.setAccessToken(accesToken);
+                    request.getSession().setAttribute("usuario", u);
+                } else {
+                    usuario.setProfilePicture(profilePic);
+                    usuario.setAccessToken(accesToken);
+                    request.getSession().setAttribute("usuario", usuario);
                 }
-
-                request.getSession().setAttribute("usuario", u);
                 request.getSession().setAttribute("usuario_instagram", true);
                 request.getRequestDispatcher("user_area/home.jsp").forward(request, response);
             }

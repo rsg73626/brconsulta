@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html><!DOCTYPE html>
 <html>
@@ -166,6 +167,7 @@
                 color: #fff;
             }
         </style>
+        <link rel="stylesheet" type="text/css" href="<c:url value="/css/button_style.css"/>"/>
     </head>
     <body>
         <header>

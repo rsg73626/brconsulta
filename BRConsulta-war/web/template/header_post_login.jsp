@@ -156,6 +156,7 @@
                 color: #fff;
             }
         </style>
+        <link rel="stylesheet" type="text/css" href="<c:url value="/css/button_style.css"/>"/>
     </head>
     <body>
         <header>
