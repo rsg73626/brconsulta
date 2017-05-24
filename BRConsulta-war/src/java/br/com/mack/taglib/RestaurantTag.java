@@ -42,17 +42,20 @@ public class RestaurantTag extends SimpleTagSupport {
             String ctrl = user != null ? "Instagram" : "Commom";
             System.out.println(ctrl);
             for (Restaurant restaurant : items) {
+                out.print("<head>\n"
+                        + "    <meta charset=\"UTF-8\">\n"
+                        + "</head>");
                 out.println("<div id='bloco'>"
                         + "<div id=\"description\"><h1>" + restaurant.getName() + "</h1><h3>Endereço</h3><p>" + restaurant.getLocation().getAddress() + "</p></div>"
                         + "<div id=\"foto\"><img src=" + restaurant.getImage() + "></div>");
 
-                out.print("<form method=\"post\" action=\"" + context + "/FrontController\">\n"
+                out.print("<form method='POST' action=\"" + context + "/FrontController\">\n"
                         + "    <input type=\"text\" hidden name=\"name\" value=\"" + restaurant.getName().replace("\"", "") + "\">\n"
                         + "    <input type=\"text\" hidden name=\"imagem\" value=\"" + restaurant.getImage().replace("\"", "") + "\">\n"
                         + "    <input type=\"text\" hidden name=\"url\" value=\"" + restaurant.getUrl().replace("\"", "") + "\">\n"
-                        + "    <input type=\"text\" hidden name=\"city\" value=\"" + restaurant.getLocation().getCity() + "\">\n"
-                        + "    <input type=\"text\" hidden name=\"address\" value=\"" + restaurant.getLocation().getAddress() + "\">\n"
-                        + "    <input type hidden name=\"ctrl\" value=\"Favorito"+ctrl+"\">\n"
+                        + "    <input type=\"text\" hidden name=\"city\" value='" + restaurant.getLocation().getCity() + "'>\n"
+                        + "    <input type=\"text\" hidden name=\"address\" value='" + restaurant.getLocation().getAddress() + "'>\n"
+                        + "    <input type hidden name=\"ctrl\" value=\"Favorito" + ctrl + "\">\n"
                         + "<input type=\"submit\" value=\"Salvar Favorito\">"
                         + "</form></div>");
             }

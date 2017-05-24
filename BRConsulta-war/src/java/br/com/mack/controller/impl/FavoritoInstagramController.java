@@ -38,7 +38,7 @@ public class FavoritoInstagramController extends AbstractController {
     @Override
     public void execute() {
         String name = request.getParameter("name");
-        String image = request.getParameter("image");
+        String image = request.getParameter("imagem");
         String url = request.getParameter("url");
         String city = request.getParameter("city");
         String address = request.getParameter("adrress");
@@ -53,8 +53,9 @@ public class FavoritoInstagramController extends AbstractController {
         location.setAddress(address);
         restaurant.setLocation(location);
         
-        instagramUser = (InstagramUser) request.getSession().getAttribute("usuario");
-        System.out.println(instagramUser.getId());
+        long id = ((InstagramUser) request.getSession().getAttribute("usuario")).getId();
+        
+        instagramUser = instagramUserDAO.readById(id);
 
         instagramUser.addRestaurant(restaurant);
 
