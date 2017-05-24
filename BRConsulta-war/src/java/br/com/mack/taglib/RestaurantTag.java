@@ -1,7 +1,6 @@
-﻿package br.com.mack.taglib;
+package br.com.mack.taglib;
 
 import br.com.mack.persistence.entities.Restaurant;
-import br.com.mack.persistence.entities.User;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.util.List;
