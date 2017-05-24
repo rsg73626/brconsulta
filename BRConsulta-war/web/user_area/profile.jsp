@@ -7,7 +7,7 @@
     <form action="${pageContext.request.contextPath}/FrontController" method="POST">
         <input type="text" required="required" id="nome_completo" name="nome_completo" value="${usuario.fullName}" title="Nome completo">
 
-        <input type="date" required="required" id="dt_nasc" name="dt_nasc" placeholder="Data de Nascimento" title="Data de Nascimento" value="${(usuario.birthday != null)?usuario.birthdayAsString:''}">
+        <input type="date" required="required" id="dt_nasc" name="dt_nasc" placeholder="Data de Nascimento" title="Data de Nascimento" value="${usuario.birthdayAsString}">
 
         <input type="email" required="required" id="email" name="email" value="${usuario.email}" placeholder="E-mail" title="E-mail">
 

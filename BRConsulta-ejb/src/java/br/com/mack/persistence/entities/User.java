@@ -50,7 +50,6 @@ public abstract class User implements Serializable {
 
     private String email;
 
-    @Column(unique = true)
     private String userName;
 
     public User() {
