@@ -11,24 +11,26 @@
 <link href="css/about_style.css" rel="stylesheet" type="text/css"/>
 
 <main>
+    <hgroup>
+        <h1>Sobre os Desenvolvedores</h1>
+        <h3>Estudantes do segundo ano do curso de Ciênica da Computação</h3>
+        <h3>Universidade Presbiteriana Mackenzie</h3>
+    </hgroup>
+
     <div>
         <figure>
-            <img src="<c:url value="/images/bruno_profile.jpg"/>" alt="Foto de Bruno Albuquerque" class="profile_pic">
+            <img src="" alt="Foto de Bruno Albuquerque">
             <figcaption>
                 <h2>Bruno Albuquerque</h2>
-                <a href="https://github.com/brunoalbrito" title="Link para o Github" target="_brank">
-                    <img src="<c:url value="/images/GitHub-Mark-64px.png"/>" alt="Logo do Github">
-                </a>
+                <p>Alguma coisa que o Bruno Albuquerque quis colocar aqui.</p>
             </figcaption>
         </figure>
 
         <figure>
-            <img src="<c:url value="/images/renan_profile.jpg"/>" alt="Foto de Renan S. Germano" class="profile_pic">
+            <img src="" alt="Foto de Renan S. Germano">
             <figcaption>
                 <h2>Renan S. Germano</h2>
-                <a href="https://github.com/rsg73626" title="Link para o Github" target="_brank">
-                    <img src="<c:url value="/images/GitHub-Mark-64px.png"/>" alt="Logo do Github">
-                </a>
+                <p>Alguma coisa que o Renan S. Germano quis colocar aqui.</p>
             </figcaption>
         </figure>
     </div>
