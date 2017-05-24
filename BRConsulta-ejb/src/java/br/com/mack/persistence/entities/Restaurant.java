@@ -1,9 +1,9 @@
 package br.com.mack.persistence.entities;
 
 import java.io.Serializable;
-import javax.ejb.LocalBean;
-import javax.ejb.Stateless;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -12,12 +12,11 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author 41583469
  */
 @XmlRootElement
-@LocalBean
-@Stateless
 @Entity
 public class Restaurant implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     
     private String name;
@@ -34,6 +33,13 @@ public class Restaurant implements Serializable {
         this.url = url;
     }
 
+    public Restaurant(String name, String image, String url, Location location) {
+        this.name = name;
+        this.image = image;
+        this.url = url;
+        this.location = location;
+    }
+    
     public String getName() {
         return name;
     }

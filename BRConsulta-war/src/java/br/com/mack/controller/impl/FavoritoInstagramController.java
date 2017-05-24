@@ -22,19 +22,11 @@ import javax.naming.NamingException;
  */
 public class FavoritoInstagramController extends AbstractController {
 
-    InstagramUser instagramUser = lookupInstagramUserBean();
-
-    InstagramUserDAO instagramUserDAO = lookupInstagramUserDAOBean();
-
-    Location location = lookupLocationBean();
-
-    Restaurant restaurant = lookupRestaurantBean();
+    private InstagramUserDAO instagramUserDAO = lookupInstagramUserDAOBean();   
+    private Restaurant restaurant;
+    private InstagramUser instagramUser;
+    private Location location;
     
-    
-    
-    
-    
-
     @Override
     public void execute() {
         String name = request.getParameter("name");
@@ -42,20 +34,15 @@ public class FavoritoInstagramController extends AbstractController {
         String url = request.getParameter("url");
         String city = request.getParameter("city");
         String address = request.getParameter("adrress");
-
-        System.out.println(city);
-
-        restaurant.setName(name);
-        restaurant.setImage(image);
-        restaurant.setUrl(url);
-
-        location.setCity(city);
-        location.setAddress(address);
-        restaurant.setLocation(location);
         
-        long id = ((InstagramUser) request.getSession().getAttribute("usuario")).getId();
+        location = new Location(address, city);
+        restaurant = new Restaurant(name, image, url, location);
         
-        instagramUser = instagramUserDAO.readById(id);
+//        long id = ((InstagramUser) request.getSession().getAttribute("usuario")).getId();
+//        
+//        instagramUser = instagramUserDAO.readById(id);
+
+        instagramUser = (InstagramUser) this.request.getSession().getAttribute("usuario");
 
         instagramUser.addRestaurant(restaurant);
 

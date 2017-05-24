@@ -2,6 +2,7 @@ package br.com.mack.rest;
 
 import br.com.mack.persistence.CommonUserDAO;
 import br.com.mack.persistence.InstagramUserDAO;
+import br.com.mack.persistence.entities.InstagramUser;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -33,15 +34,10 @@ public class Favorito {
     @Produces(MediaType.TEXT_XML)
     @Path("/usuario-insta/{id}")
     public List<Restaurant> userInsta(@PathParam("id") int id) {
-        return instagramUserDAO.readById(id).getRestaurants();
-    }
-
-    @GET
-    @Produces(MediaType.TEXT_XML)
-    @Path("/usuario-commom/{id}")
-    public List<Restaurant> userCommmom(@PathParam("id") int id) {
-        System.out.println(id);
-        return instagramUserDAO.readById(id).getRestaurants();
+        InstagramUser user = instagramUserDAO.readById(id);
+        System.out.println("Instagram User: " + user);
+        System.out.println("Restaurantes: " + user.getRestaurants().size());
+        return user.getRestaurants();
     }
 
     private InstagramUserDAO lookupInstagramUserDAOBean() {
