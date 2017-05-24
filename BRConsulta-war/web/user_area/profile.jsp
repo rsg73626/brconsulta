@@ -1,28 +1,24 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:import url="/template/header_post_login.jsp"/>
 <link href="<c:url value="/css/profile.css"/>" rel="stylesheet" type="text/css"/>
+
 <main>
-    <form action="" method="POST">
-        <label for="nome_completo">Nome Completo: </label>
-        <input type="text" required="required" id="nome_completo" name="nome_completo">
+    <form action="${pageContext.request.contextPath}/FrontController" method="POST">
+        <input type="text" required="required" id="nome_completo" name="nome_completo" value="${usuario.fullName}" title="Nome completo">
 
-        <label for="dt_nasc">Data de Nascimento: </label>
-        <input type="date" required="required" id="dt_nasc" name="dt_nasc">
+        <input type="date" required="required" id="dt_nasc" name="dt_nasc" placeholder="Data de Nascimento" title="Data de Nascimento" value="${(usuario.birthday != null)?usuario.birthdayAsString:''}">
 
-        <label for="email">E-mail: </label>
-        <input type="email" required="required" id="email" name="email">
+        <input type="email" required="required" id="email" name="email" value="${usuario.email}" placeholder="E-mail" title="E-mail">
 
-        <label for="usuario">Nome de Usuário: </label>
-        <input type="text" required="required" id="usuario" name="usuario">
+        <input type="text" required="required" id="usuario" name="usuario" value="${usuario.userName}" title="Nome de Usuário" readonly="readonly">
 
-        <label for="senha">Senha: </label>
-        <input type="password" required="required" id="senha" name="senha">
+        <c:if test="${usuario_instagram == null}">
+            <input type="password" required="required" id="senha" name="senha" placeholder="Senha" title="Senha">
+            <input type="password" required="required" id="conf_senha" name="conf_senha" placeholder="Confirmação de Senha" title="Confirmação de Senha">
+        </c:if>
 
-        <label for="conf_senha">Confirmarção de Senha: </label>
-        <input type="password" required="required" id="conf_senha" name="conf_senha">
-
-        <input type="hidden" name="ctrl" value="Cadastro"/>
+        <input type="hidden" name="ctrl" value="Update${(usuario_instagram != null)?'Instagram':'Common'}Profile"/>
 
         <input type="submit" value="ALTERAR">
     </form>
