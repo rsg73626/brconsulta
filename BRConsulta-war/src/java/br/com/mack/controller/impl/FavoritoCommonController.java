@@ -48,6 +48,8 @@ public class FavoritoCommonController extends AbstractController {
         location.setAddress(address);
         restaurant.setLocation(location);
 
+        user= (CommonUser) request.getSession().getAttribute("usuario");
+        
         user.addRestaurant(restaurant);
 
         userDAO.create(user);
