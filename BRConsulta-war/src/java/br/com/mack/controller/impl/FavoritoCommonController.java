@@ -7,12 +7,9 @@ package br.com.mack.controller.impl;
 
 import br.com.mack.controller.AbstractController;
 import br.com.mack.persistence.CommonUserDAO;
-import br.com.mack.persistence.InstagramUserDAO;
 import br.com.mack.persistence.entities.CommonUser;
-import br.com.mack.persistence.entities.InstagramUser;
 import br.com.mack.persistence.entities.Location;
 import br.com.mack.persistence.entities.Restaurant;
-import br.com.mack.persistence.entities.User;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.Context;
@@ -58,27 +55,6 @@ public class FavoritoCommonController extends AbstractController {
         returnPage = "user_area/home.jsp";
 
     }
-
-    private InstagramUser lookupInstagramUserBean() {
-        try {
-            Context c = new InitialContext();
-            return (InstagramUser) c.lookup("java:global/BRConsulta/BRConsulta-ejb/InstagramUser!br.com.mack.persistence.entities.InstagramUser");
-        } catch (NamingException ne) {
-            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
-            throw new RuntimeException(ne);
-        }
-    }
-
-    private InstagramUserDAO lookupInstagramUserDAOBean() {
-        try {
-            Context c = new InitialContext();
-            return (InstagramUserDAO) c.lookup("java:global/BRConsulta/BRConsulta-ejb/InstagramUserDAO!br.com.mack.persistence.InstagramUserDAO");
-        } catch (NamingException ne) {
-            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
-            throw new RuntimeException(ne);
-        }
-    }
-
     private Location lookupLocationBean() {
         try {
             Context c = new InitialContext();
