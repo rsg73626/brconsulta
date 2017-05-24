@@ -7,7 +7,6 @@ package br.com.mack.controller.impl;
 
 import br.com.mack.controller.AbstractController;
 import br.com.mack.persistence.CommonUserDAO;
-import br.com.mack.persistence.GenericDAO;
 import br.com.mack.persistence.entities.CommonUser;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +23,6 @@ import javax.naming.NamingException;
 public class CadastroController extends AbstractController {
 
     CommonUserDAO commonUserDAO = lookupCommonUserDAOBean();
-
     
 
     

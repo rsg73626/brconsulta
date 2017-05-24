@@ -9,9 +9,7 @@
     <article>
         <form action="<c:url value="/FrontController"/>" method="POST">
             <input type="text" name="restaurat">
-
             <input type="hidden" name="ctrl" value="SearchRestaurant"/>
-
             <input type="submit" value="Buscar">
         </form>
     </article>

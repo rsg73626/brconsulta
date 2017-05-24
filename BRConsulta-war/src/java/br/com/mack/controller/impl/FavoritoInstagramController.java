@@ -6,9 +6,10 @@
 package br.com.mack.controller.impl;
 
 import br.com.mack.controller.AbstractController;
+import br.com.mack.persistence.InstagramUserDAO;
+import br.com.mack.persistence.entities.InstagramUser;
 import br.com.mack.persistence.entities.Location;
 import br.com.mack.persistence.entities.Restaurant;
-import br.com.mack.persistence.entities.User;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.Context;
@@ -19,34 +20,36 @@ import javax.naming.NamingException;
  *
  * @author 41583469
  */
-public class FavoritoController extends AbstractController{
+public class FavoritoInstagramController extends AbstractController {
 
-    Location location = lookupLocationBean();
-
-    Restaurant restaurant = lookupRestaurantBean();
-
+    private InstagramUserDAO instagramUserDAO = lookupInstagramUserDAOBean();   
+    private Restaurant restaurant;
+    private InstagramUser instagramUser;
+    private Location location;
     
     @Override
     public void execute() {
         String name = request.getParameter("name");
-        String image = request.getParameter("image");
+        String image = request.getParameter("imagem");
         String url = request.getParameter("url");
         String city = request.getParameter("city");
         String address = request.getParameter("adrress");
         
-        System.out.println(city);
+        location = new Location(address, city);
+        restaurant = new Restaurant(name, image, url, location);
         
-        restaurant.setName(name);
-        restaurant.setImage(image);
-        restaurant.setUrl(url);
-        
-        location.setCity(city);
-        location.setAddress(address);
-        restaurant.setLocation(location);
-                
+//        long id = ((InstagramUser) request.getSession().getAttribute("usuario")).getId();
+//        
+//        instagramUser = instagramUserDAO.readById(id);
+
+        instagramUser = (InstagramUser) this.request.getSession().getAttribute("usuario");
+
+        instagramUser.addRestaurant(restaurant);
+
+        instagramUserDAO.update(instagramUser);
+
         returnPage = "user_area/home.jsp";
-        
-        
+
     }
 
     private Restaurant lookupRestaurantBean() {
@@ -69,14 +72,24 @@ public class FavoritoController extends AbstractController{
         }
     }
 
-    private User lookupUserBean() {
+    private InstagramUserDAO lookupInstagramUserDAOBean() {
         try {
             Context c = new InitialContext();
-            return (User) c.lookup("java:global/BRConsulta/BRConsulta-ejb/User!br.com.mack.persistence.entities.User");
+            return (InstagramUserDAO) c.lookup("java:global/BRConsulta/BRConsulta-ejb/InstagramUserDAO!br.com.mack.persistence.InstagramUserDAO");
         } catch (NamingException ne) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
             throw new RuntimeException(ne);
         }
     }
-    
+
+    private InstagramUser lookupInstagramUserBean() {
+        try {
+            Context c = new InitialContext();
+            return (InstagramUser) c.lookup("java:global/BRConsulta/BRConsulta-ejb/InstagramUser!br.com.mack.persistence.entities.InstagramUser");
+        } catch (NamingException ne) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
+            throw new RuntimeException(ne);
+        }
+    }
+
 }

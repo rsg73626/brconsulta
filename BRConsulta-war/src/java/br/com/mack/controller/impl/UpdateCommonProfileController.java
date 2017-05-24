@@ -7,7 +7,6 @@ package br.com.mack.controller.impl;
 
 import br.com.mack.controller.AbstractController;
 import br.com.mack.persistence.CommonUserDAO;
-import br.com.mack.persistence.InstagramUserDAO;
 import br.com.mack.persistence.entities.CommonUser;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,14 +34,14 @@ public class UpdateCommonProfileController extends AbstractController {
 
         if (fullName != null && birthday != null && email != null && senha != null && confirmacaoSenha != null && senha.equals(confirmacaoSenha)) {
             CommonUser usuario = (CommonUser) this.request.getSession().getAttribute("usuario");
-            
+
             usuario.setFullName(fullName);
             usuario.setBirthday(birthday);
             usuario.setEmail(email);
             usuario.setPassword(senha);
-            
+
             commonUserDAO.update(usuario);
-            
+
             this.returnPage = "user_area/profile.jsp";
         } else {
             List<String> erros = new ArrayList();
@@ -84,5 +83,4 @@ public class UpdateCommonProfileController extends AbstractController {
             throw new RuntimeException(ne);
         }
     }
-
 }

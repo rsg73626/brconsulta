@@ -7,7 +7,6 @@ package br.com.mack.controller.impl;
 
 import br.com.mack.controller.AbstractController;
 import br.com.mack.persistence.CommonUserDAO;
-import br.com.mack.persistence.GenericDAO;
 import br.com.mack.persistence.entities.User;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,28 +18,26 @@ import javax.naming.NamingException;
  *
  * @author 31595472
  */
-public class LoginController extends AbstractController{    
+public class LoginController extends AbstractController {
 
     CommonUserDAO commonUserDAO = lookupCommonUserDAOBean();
 
-    
-    
     @Override
     public void execute() {
         String usuario = request.getParameter("usuario");
         String senha = request.getParameter("senha");
-        
+
         User user = null;
-        user = ((CommonUserDAO)commonUserDAO).login(usuario, senha);
-        
-        if(user != null){
+        user = ((CommonUserDAO) commonUserDAO).login(usuario, senha);
+
+        if (user != null) {
             this.returnPage = "user_area/home.jsp";
             this.request.getSession().setAttribute("usuario", user);
-        }else{
+        } else {
             this.returnPage = "erro.jsp";
             this.request.getSession().setAttribute("errorMessages", new String[]{"Usuário ou senha incorreto!"});
         }
-    }    
+    }
 
     private CommonUserDAO lookupCommonUserDAOBean() {
         try {
