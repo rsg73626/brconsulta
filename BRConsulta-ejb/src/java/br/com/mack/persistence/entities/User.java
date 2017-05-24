@@ -26,6 +26,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -35,6 +36,7 @@ import javax.persistence.TemporalType;
 @Table(name = "Usuario")
 @Inheritance(strategy = InheritanceType.JOINED)//Uma tabela para cada classe (incluindo a abstrata)
 @Local
+@XmlRootElement
 public abstract class User implements Serializable {
 
     @Id
