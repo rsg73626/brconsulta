@@ -6,7 +6,6 @@
 package br.com.mack.persistence.entities;
 
 import java.util.Date;
-import javax.ejb.Stateless;
 import javax.persistence.Entity;
 import javax.persistence.Transient;
 
@@ -15,7 +14,6 @@ import javax.persistence.Transient;
  * @author 31595472
  */
 @Entity
-@Stateless
 public class InstagramUser extends User{
     private long instagramId;
     @Transient

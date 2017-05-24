@@ -1,6 +1,7 @@
 package br.com.mack.taglib;
 
 import br.com.mack.persistence.entities.Restaurant;
+import br.com.mack.persistence.entities.User;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.util.List;
@@ -8,6 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
+
 /**
  *
  * @author Bruno
@@ -16,6 +18,7 @@ public class RestaurantTag extends SimpleTagSupport {
 
     private List<Restaurant> items;
     private String context;
+    private Boolean user;
 
     public void setItems(List<Restaurant> items) {
         this.items = items;
@@ -24,7 +27,10 @@ public class RestaurantTag extends SimpleTagSupport {
     public void setContext(String context) {
         this.context = context;
     }
-    
+
+    public void setUser(Boolean user) {
+        this.user = user;
+    }
 
     private StringWriter sw = new StringWriter();
 
@@ -32,20 +38,26 @@ public class RestaurantTag extends SimpleTagSupport {
     public void doTag() {
         try {
             JspWriter out = getJspContext().getOut();
+
+            String ctrl = user != null ? "Instagram" : "Commom";
+            System.out.println(ctrl);
             for (Restaurant restaurant : items) {
+                out.print("<head>\n"
+                        + "    <meta charset=\"UTF-8\">\n"
+                        + "</head>");
                 out.println("<div id='bloco'>"
                         + "<div id=\"description\"><h1>" + restaurant.getName() + "</h1><h3>Endereço</h3><p>" + restaurant.getLocation().getAddress() + "</p></div>"
-                        + "<div id=\"foto\"><img src=" + restaurant.getImage() + "></div>");                
+                        + "<div id=\"foto\"><img src=" + restaurant.getImage() + "></div>");
 
-                out.print("<form method=\"post\" action=\""+context+"/FrontController\">\n" +
-"    <input type=\"text\" hidden name=\"name\" value=\""+restaurant.getName().replace("\"", "")+"\">\n" +
-"    <input type=\"text\" hidden name=\"imagem\" value=\""+restaurant.getImage().replace("\"", "")+"\">\n" +
-"    <input type=\"text\" hidden name=\"url\" value=\""+restaurant.getUrl().replace("\"", "")+"\">\n" +
-"    <input type=\"text\" hidden name=\"city\" value=\""+restaurant.getLocation().getCity()+"\">\n" +
-"    <input type=\"text\" hidden name=\"address\" value=\""+restaurant.getLocation().getAddress()+"\">\n" +
-"    <input type hidden name=\"ctrl\" value=\"Favorito\">\n"
-        + "<input type=\"submit\" value=\"Salvar Favorito\">" +
-"</form></div>");
+                out.print("<form method='POST' action=\"" + context + "/FrontController\">\n"
+                        + "    <input type=\"text\" hidden name=\"name\" value=\"" + restaurant.getName().replace("\"", "") + "\">\n"
+                        + "    <input type=\"text\" hidden name=\"imagem\" value=\"" + restaurant.getImage().replace("\"", "") + "\">\n"
+                        + "    <input type=\"text\" hidden name=\"url\" value=\"" + restaurant.getUrl().replace("\"", "") + "\">\n"
+                        + "    <input type=\"text\" hidden name=\"city\" value='" + restaurant.getLocation().getCity() + "'>\n"
+                        + "    <input type=\"text\" hidden name=\"address\" value='" + restaurant.getLocation().getAddress() + "'>\n"
+                        + "    <input type hidden name=\"ctrl\" value=\"Favorito" + ctrl + "\">\n"
+                        + "<input type=\"submit\" value=\"Salvar Favorito\">"
+                        + "</form></div>");
             }
 //            out.print("<h1>Hello World!</h1>");
         } catch (IOException ex) {

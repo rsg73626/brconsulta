@@ -21,9 +21,7 @@ import javax.persistence.PersistenceContext;
 public class InstagramUserDAO implements GenericDAO<InstagramUser> {
 
     @PersistenceContext(name = "BRConsulta-ejbPU")
-    private EntityManager em;    
-
-    
+    private EntityManager em;
     
     @Override
     public void create(InstagramUser insta) {
@@ -66,17 +64,4 @@ public class InstagramUserDAO implements GenericDAO<InstagramUser> {
     public void persist(Object object) {
         em.persist(object);
     }
-
-    public void persist1(Object object) {
-        em.persist(object);
-    }
-
-    public void persist2(Object object) {
-        em.persist(object);
-    }
-
-    public void persist3(Object object) {
-        em.persist(object);
-    }
-
 }

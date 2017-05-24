@@ -26,7 +26,7 @@
     </c:if>
     <c:choose>
         <c:when test="${restaurants != null}">
-            <h:Rest items="${restaurants}" context="${pageContext.request.contextPath}" />            
+            <h:Rest items="${restaurants}" context="${pageContext.request.contextPath}" user="${usuario_instagram}" />            
         </c:when>
     </c:choose>
 </main>
