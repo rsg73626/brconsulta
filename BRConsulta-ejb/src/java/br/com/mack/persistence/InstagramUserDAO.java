@@ -62,21 +62,4 @@ public class InstagramUserDAO implements GenericDAO<InstagramUser> {
     public void delete(InstagramUser e) {
         em.remove(em.merge(e));
     }
-
-    public void persist(Object object) {
-        em.persist(object);
-    }
-
-    public void persist1(Object object) {
-        em.persist(object);
-    }
-
-    public void persist2(Object object) {
-        em.persist(object);
-    }
-
-    public void persist3(Object object) {
-        em.persist(object);
-    }
-
 }

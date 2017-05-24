@@ -1,6 +1,5 @@
 package br.com.mack.persistence;
 
-import br.com.mack.persistence.entities.CommonUser;
 import br.com.mack.persistence.entities.Restaurant;
 import java.util.List;
 import javax.ejb.LocalBean;
