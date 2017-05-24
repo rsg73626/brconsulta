@@ -21,6 +21,11 @@ main form{
     align-items: center;
 }
 
+main form label{
+    width: 50%;
+    text-align: left;
+}
+
 main form input[type=text], input[type=date], input[type=email], input[type=password]{
     width: 50%;
 }

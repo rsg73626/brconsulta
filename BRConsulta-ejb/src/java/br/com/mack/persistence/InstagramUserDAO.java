@@ -9,10 +9,8 @@ import br.com.mack.persistence.entities.InstagramUser;
 import java.util.List;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateful;
-import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceContextType;
 
 /**
  *
@@ -25,6 +23,8 @@ public class InstagramUserDAO implements GenericDAO<InstagramUser> {
     @PersistenceContext(name = "BRConsulta-ejbPU")
     private EntityManager em;    
 
+    
+    
     @Override
     public void create(InstagramUser insta) {
         try {
@@ -55,7 +55,7 @@ public class InstagramUserDAO implements GenericDAO<InstagramUser> {
 
     @Override
     public void update(InstagramUser e) {
-        em.persist(em.merge(e));
+        em.persist(e);
     }
 
     @Override
