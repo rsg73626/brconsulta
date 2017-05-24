@@ -45,6 +45,16 @@ public class CommonUserDAO implements GenericDAO<CommonUser> {
         return em.find(CommonUser.class, id);
     }
 
+    public CommonUser readByUserName(String userName) {
+        try {
+            return (CommonUser) em.createQuery("SELECT cu FROM CommonUser cu WHERE cu.userName = :un")
+                    .setParameter("un", userName)
+                    .getSingleResult();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
     @Override
     public void update(CommonUser e) {
         em.persist(em.merge(e));

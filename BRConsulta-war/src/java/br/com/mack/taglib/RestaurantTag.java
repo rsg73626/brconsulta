@@ -1,4 +1,4 @@
-package br.com.mack.taglib;
+﻿package br.com.mack.taglib;
 
 import br.com.mack.persistence.entities.Restaurant;
 import br.com.mack.persistence.entities.User;

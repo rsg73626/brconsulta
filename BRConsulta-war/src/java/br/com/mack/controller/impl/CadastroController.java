@@ -25,6 +25,8 @@ public class CadastroController extends AbstractController {
     CommonUserDAO commonUserDAO = lookupCommonUserDAOBean();
     
 
+    
+
     @Override
     public void execute() {
         this.returnPage = "user_area/home.jsp";
@@ -61,21 +63,26 @@ public class CadastroController extends AbstractController {
             erro = true;
             erros.add("Os campos SENHA e CONFIRMAÇÃO DE SENHA devem possuir valores iguais");
         }
+        
+        CommonUser usuario = commonUserDAO.readByUserName(user.getUserName());
+        System.out.println("Fez a busca corretamente!");
+        if(usuario != null){
+            erro = true;
+            erros.add("Já existe um usuário cadastrado com este NOME DE USUÁRIO");
+        }
 
         if (erro) {
             this.returnPage = "erro.jsp";
             this.request.getSession().setAttribute("errorMessages", erros);
             return;
-        }
+        }       
 
         try {
             commonUserDAO.create(user);
             request.getSession().setAttribute("usuario", user);
         } catch (Exception e) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", e);
-            erro = true;
-            erros.add("Já existe um usuário cadastrado com este NOME DE USUÁRIO");
-            this.request.getSession().setAttribute("errorMessages", erros);
+            this.request.getSession().setAttribute("errorMessages", new String[]{"Erro interno de Servidor"});
             this.returnPage = "erro.jsp";
         }
     }
