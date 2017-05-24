@@ -33,9 +33,16 @@ public class RestaurantTag extends SimpleTagSupport {
         try {
             JspWriter out = getJspContext().getOut();
             for (Restaurant restaurant : items) {
-                out.println("<div id='bloco'>"
-                        + "<div id=\"description\"><h1>" + restaurant.getName() + "</h1><h3>Endereço</h3><p>" + restaurant.getLocation().getAddress() + "</p></div>"
-                        + "<div id=\"foto\"><img src=" + restaurant.getImage() + "></div>");                
+                out.println(
+                        "<div class='bloco'>"+
+                            "<div id=\"description\">"+
+                                "<h1>" + restaurant.getName() + "</h1>"+
+                                "<h3>Endereço</h3>"+
+                                "<p>" + restaurant.getLocation().getAddress() + "</p>"+
+                            "</div>"+
+                        "<div id=\"foto\">"+
+                        "<img src=" + restaurant.getImage() + ">"+
+                        "</div>");                
 
                 out.print("<form method=\"post\" action=\""+context+"/FrontController\">\n" +
 "    <input type=\"text\" hidden name=\"name\" value=\""+restaurant.getName().replace("\"", "")+"\">\n" +

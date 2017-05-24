@@ -18,12 +18,14 @@ public class SearchRestaurantController extends AbstractController {
 
     RestauranteParser restaurante = lookupRestauranteParserBean();
 
+    
+
     @Override
     public void execute() {
         String location = request.getParameter("restaurat");
         String content = RestauranteParser.openURL(location.replace(" ", "+"));
 
-        ArrayList<Restaurant> rs = (ArrayList< Restaurant>) restaurante.parse(content);
+        ArrayList<Restaurant> rs = (ArrayList<Restaurant>) restaurante.parse(content);
         request.getSession().setAttribute("restaurants", rs);
         returnPage = "user_area/home.jsp";
     }
@@ -37,5 +39,7 @@ public class SearchRestaurantController extends AbstractController {
             throw new RuntimeException(ne);
         }
     }
+
+    
 
 }
