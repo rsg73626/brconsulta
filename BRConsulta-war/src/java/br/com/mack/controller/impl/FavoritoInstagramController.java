@@ -11,7 +11,6 @@ import br.com.mack.persistence.RestaurantDAO;
 import br.com.mack.persistence.entities.InstagramUser;
 import br.com.mack.persistence.entities.Location;
 import br.com.mack.persistence.entities.Restaurant;
-import br.com.mack.persistence.entities.User;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.Context;
@@ -26,13 +25,13 @@ public class FavoritoInstagramController extends AbstractController{
 
     RestaurantDAO restaurantDAO = lookupRestaurantDAOBean();
 
-    InstagramUserDAO instagramUserDAO = lookupInstagramUserDAOBean();
-
-    InstagramUser instagramUser = lookupInstagramUserBean();
+    Restaurant restaurant = lookupRestaurantBean();
 
     Location location = lookupLocationBean();
 
-    Restaurant restaurant = lookupRestaurantBean();
+    InstagramUser instagramUser = lookupInstagramUserBean();
+
+    InstagramUserDAO instagramUserDAO = lookupInstagramUserDAOBean();
 
     
     
@@ -54,7 +53,7 @@ public class FavoritoInstagramController extends AbstractController{
         location.setAddress(address);
         restaurant.setLocation(location);
         
-        instagramUser.addRestaurant(restaurant);
+        //instagramUser.addRestaurant(restaurant);
         
         //instagramUserDAO.update(instagramUser);
         
@@ -65,30 +64,10 @@ public class FavoritoInstagramController extends AbstractController{
         
     }
 
-    private Restaurant lookupRestaurantBean() {
+    private InstagramUserDAO lookupInstagramUserDAOBean() {
         try {
             Context c = new InitialContext();
-            return (Restaurant) c.lookup("java:global/BRConsulta/BRConsulta-ejb/Restaurant!br.com.mack.persistence.entities.Restaurant");
-        } catch (NamingException ne) {
-            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
-            throw new RuntimeException(ne);
-        }
-    }
-
-    private Location lookupLocationBean() {
-        try {
-            Context c = new InitialContext();
-            return (Location) c.lookup("java:global/BRConsulta/BRConsulta-ejb/Location!br.com.mack.persistence.entities.Location");
-        } catch (NamingException ne) {
-            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
-            throw new RuntimeException(ne);
-        }
-    }
-
-    private User lookupUserBean() {
-        try {
-            Context c = new InitialContext();
-            return (User) c.lookup("java:global/BRConsulta/BRConsulta-ejb/User!br.com.mack.persistence.entities.User");
+            return (InstagramUserDAO) c.lookup("java:global/BRConsulta/BRConsulta-ejb/InstagramUserDAO!br.com.mack.persistence.InstagramUserDAO");
         } catch (NamingException ne) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
             throw new RuntimeException(ne);
@@ -105,10 +84,20 @@ public class FavoritoInstagramController extends AbstractController{
         }
     }
 
-    private InstagramUserDAO lookupInstagramUserDAOBean() {
+    private Location lookupLocationBean() {
         try {
             Context c = new InitialContext();
-            return (InstagramUserDAO) c.lookup("java:global/BRConsulta/BRConsulta-ejb/InstagramUserDAO!br.com.mack.persistence.InstagramUserDAO");
+            return (Location) c.lookup("java:global/BRConsulta/BRConsulta-ejb/Location!br.com.mack.persistence.entities.Location");
+        } catch (NamingException ne) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
+            throw new RuntimeException(ne);
+        }
+    }
+
+    private Restaurant lookupRestaurantBean() {
+        try {
+            Context c = new InitialContext();
+            return (Restaurant) c.lookup("java:global/BRConsulta/BRConsulta-ejb/Restaurant!br.com.mack.persistence.entities.Restaurant");
         } catch (NamingException ne) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
             throw new RuntimeException(ne);
@@ -124,5 +113,4 @@ public class FavoritoInstagramController extends AbstractController{
             throw new RuntimeException(ne);
         }
     }
-    
 }
