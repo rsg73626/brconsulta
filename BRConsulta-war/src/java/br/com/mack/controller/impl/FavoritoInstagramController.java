@@ -22,13 +22,15 @@ import javax.naming.NamingException;
  */
 public class FavoritoInstagramController extends AbstractController {
 
-    Restaurant restaurant = lookupRestaurantBean();
+    InstagramUserDAO instagramUserDAO = lookupInstagramUserDAOBean1();
+
+    Restaurant restaurant1 = lookupRestaurantBean1();
 
     Location location = lookupLocationBean();
 
     InstagramUser instagramUser = lookupInstagramUserBean();
 
-    InstagramUserDAO instagramUserDAO = lookupInstagramUserDAOBean();
+    Restaurant restaurant = lookupRestaurantBean();
 
     @Override
     public void execute() {
@@ -66,6 +68,16 @@ public class FavoritoInstagramController extends AbstractController {
         }
     }
 
+    private Restaurant lookupRestaurantBean() {
+        try {
+            Context c = new InitialContext();
+            return (Restaurant) c.lookup("java:global/BRConsulta/BRConsulta-ejb/Restaurant!br.com.mack.persistence.entities.Restaurant");
+        } catch (NamingException ne) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
+            throw new RuntimeException(ne);
+        }
+    }
+
     private InstagramUser lookupInstagramUserBean() {
         try {
             Context c = new InitialContext();
@@ -86,10 +98,20 @@ public class FavoritoInstagramController extends AbstractController {
         }
     }
 
-    private Restaurant lookupRestaurantBean() {
+    private Restaurant lookupRestaurantBean1() {
         try {
             Context c = new InitialContext();
             return (Restaurant) c.lookup("java:global/BRConsulta/BRConsulta-ejb/Restaurant!br.com.mack.persistence.entities.Restaurant");
+        } catch (NamingException ne) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
+            throw new RuntimeException(ne);
+        }
+    }
+
+    private InstagramUserDAO lookupInstagramUserDAOBean1() {
+        try {
+            Context c = new InitialContext();
+            return (InstagramUserDAO) c.lookup("java:global/BRConsulta/BRConsulta-ejb/InstagramUserDAO!br.com.mack.persistence.InstagramUserDAO");
         } catch (NamingException ne) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
             throw new RuntimeException(ne);

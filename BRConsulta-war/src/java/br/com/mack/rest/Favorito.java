@@ -22,9 +22,9 @@ import javax.ws.rs.PathParam;
 @Path("/favoritos")
 public class Favorito {
 
-    InstagramUserDAO instagramUserDAO = lookupInstagramUserDAOBean();
-
     CommonUserDAO commonUserDAO = lookupCommonUserDAOBean();
+
+    InstagramUserDAO instagramUserDAO = lookupInstagramUserDAOBean();
 
     public Favorito() {
     }
@@ -44,20 +44,20 @@ public class Favorito {
         return instagramUserDAO.readById(id).getRestaurants();
     }
 
-    private CommonUserDAO lookupCommonUserDAOBean() {
+    private InstagramUserDAO lookupInstagramUserDAOBean() {
         try {
             Context c = new InitialContext();
-            return (CommonUserDAO) c.lookup("java:global/BRConsulta/BRConsulta-ejb/CommonUserDAO!br.com.mack.persistence.CommonUserDAO");
+            return (InstagramUserDAO) c.lookup("java:global/BRConsulta/BRConsulta-ejb/InstagramUserDAO!br.com.mack.persistence.InstagramUserDAO");
         } catch (NamingException ne) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
             throw new RuntimeException(ne);
         }
     }
 
-    private InstagramUserDAO lookupInstagramUserDAOBean() {
+    private CommonUserDAO lookupCommonUserDAOBean() {
         try {
             Context c = new InitialContext();
-            return (InstagramUserDAO) c.lookup("java:global/BRConsulta/BRConsulta-ejb/InstagramUserDAO!br.com.mack.persistence.InstagramUserDAO");
+            return (CommonUserDAO) c.lookup("java:global/BRConsulta/BRConsulta-ejb/CommonUserDAO!br.com.mack.persistence.CommonUserDAO");
         } catch (NamingException ne) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
             throw new RuntimeException(ne);

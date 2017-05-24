@@ -18,6 +18,9 @@ public class SearchRestaurantController extends AbstractController {
 
     RestauranteParser restaurante = lookupRestauranteParserBean();
 
+    
+    
+
     @Override
     public void execute() {
         String location = request.getParameter("restaurat");
@@ -37,5 +40,4 @@ public class SearchRestaurantController extends AbstractController {
             throw new RuntimeException(ne);
         }
     }
-
 }

@@ -6,7 +6,9 @@
 package br.com.mack.controller.impl;
 
 import br.com.mack.controller.AbstractController;
+import br.com.mack.persistence.CommonUserDAO;
 import br.com.mack.persistence.InstagramUserDAO;
+import br.com.mack.persistence.entities.CommonUser;
 import br.com.mack.persistence.entities.InstagramUser;
 import br.com.mack.persistence.entities.Location;
 import br.com.mack.persistence.entities.Restaurant;
@@ -21,18 +23,16 @@ import javax.naming.NamingException;
  *
  * @author 41583469
  */
-public class FavoritoCommonController extends AbstractController{
-
-    InstagramUser instagramUser = lookupInstagramUserBean();
-
-    InstagramUserDAO instagramUserDAO = lookupInstagramUserDAOBean();
-
-    Location location = lookupLocationBean();
+public class FavoritoCommonController extends AbstractController {
 
     Restaurant restaurant = lookupRestaurantBean();
 
-    
-    
+    CommonUserDAO userDAO = lookupCommonUserDAOBean();
+
+    CommonUser user = lookupCommonUserBean();
+
+    Location location = lookupLocationBean();
+
     @Override
     public void execute() {
         String name = request.getParameter("name");
@@ -40,50 +40,29 @@ public class FavoritoCommonController extends AbstractController{
         String url = request.getParameter("url");
         String city = request.getParameter("city");
         String address = request.getParameter("adrress");
-        
+
         System.out.println(city);
-        
+
         restaurant.setName(name);
         restaurant.setImage(image);
         restaurant.setUrl(url);
-        
+
         location.setCity(city);
         location.setAddress(address);
         restaurant.setLocation(location);
-        
-        instagramUser.addRestaurant(restaurant);
-        
-        instagramUserDAO.create(instagramUser);
-        
+
+        user.addRestaurant(restaurant);
+
+        userDAO.create(user);
+
         returnPage = "user_area/home.jsp";
-        
-        
+
     }
 
-    private Restaurant lookupRestaurantBean() {
+    private InstagramUser lookupInstagramUserBean() {
         try {
             Context c = new InitialContext();
-            return (Restaurant) c.lookup("java:global/BRConsulta/BRConsulta-ejb/Restaurant!br.com.mack.persistence.entities.Restaurant");
-        } catch (NamingException ne) {
-            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
-            throw new RuntimeException(ne);
-        }
-    }
-
-    private Location lookupLocationBean() {
-        try {
-            Context c = new InitialContext();
-            return (Location) c.lookup("java:global/BRConsulta/BRConsulta-ejb/Location!br.com.mack.persistence.entities.Location");
-        } catch (NamingException ne) {
-            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
-            throw new RuntimeException(ne);
-        }
-    }
-
-    private User lookupUserBean() {
-        try {
-            Context c = new InitialContext();
-            return (User) c.lookup("java:global/BRConsulta/BRConsulta-ejb/User!br.com.mack.persistence.entities.User");
+            return (InstagramUser) c.lookup("java:global/BRConsulta/BRConsulta-ejb/InstagramUser!br.com.mack.persistence.entities.InstagramUser");
         } catch (NamingException ne) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
             throw new RuntimeException(ne);
@@ -100,14 +79,43 @@ public class FavoritoCommonController extends AbstractController{
         }
     }
 
-    private InstagramUser lookupInstagramUserBean() {
+    private Location lookupLocationBean() {
         try {
             Context c = new InitialContext();
-            return (InstagramUser) c.lookup("java:global/BRConsulta/BRConsulta-ejb/InstagramUser!br.com.mack.persistence.entities.InstagramUser");
+            return (Location) c.lookup("java:global/BRConsulta/BRConsulta-ejb/Location!br.com.mack.persistence.entities.Location");
         } catch (NamingException ne) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
             throw new RuntimeException(ne);
         }
     }
-    
+
+    private CommonUser lookupCommonUserBean() {
+        try {
+            Context c = new InitialContext();
+            return (CommonUser) c.lookup("java:global/BRConsulta/BRConsulta-ejb/CommonUser!br.com.mack.persistence.entities.CommonUser");
+        } catch (NamingException ne) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
+            throw new RuntimeException(ne);
+        }
+    }
+
+    private CommonUserDAO lookupCommonUserDAOBean() {
+        try {
+            Context c = new InitialContext();
+            return (CommonUserDAO) c.lookup("java:global/BRConsulta/BRConsulta-ejb/CommonUserDAO!br.com.mack.persistence.CommonUserDAO");
+        } catch (NamingException ne) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
+            throw new RuntimeException(ne);
+        }
+    }
+
+    private Restaurant lookupRestaurantBean() {
+        try {
+            Context c = new InitialContext();
+            return (Restaurant) c.lookup("java:global/BRConsulta/BRConsulta-ejb/Restaurant!br.com.mack.persistence.entities.Restaurant");
+        } catch (NamingException ne) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
+            throw new RuntimeException(ne);
+        }
+    }
 }

@@ -68,5 +68,4 @@ public class UpdateInstagramProfileController extends AbstractController {
             throw new RuntimeException(ne);
         }
     }
-
 }
