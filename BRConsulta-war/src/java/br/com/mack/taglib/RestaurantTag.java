@@ -38,7 +38,7 @@ public class RestaurantTag extends SimpleTagSupport {
         try {
             JspWriter out = getJspContext().getOut();
 
-            String ctrl = user != null ? "Instagram" : "Commom";
+            String ctrl = user?"Instagram":"Commom";
             System.out.println(ctrl);
             for (Restaurant restaurant : items) {
                 out.print("<head>\n"

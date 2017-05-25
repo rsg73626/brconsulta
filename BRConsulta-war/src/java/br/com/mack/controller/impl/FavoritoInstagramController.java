@@ -10,6 +10,8 @@ import br.com.mack.persistence.InstagramUserDAO;
 import br.com.mack.persistence.entities.InstagramUser;
 import br.com.mack.persistence.entities.Location;
 import br.com.mack.persistence.entities.Restaurant;
+import br.com.mack.persistence.entities.User;
+import br.com.mack.sessionbeans.ProducerSessionBeanLocal;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.Context;
@@ -22,11 +24,13 @@ import javax.naming.NamingException;
  */
 public class FavoritoInstagramController extends AbstractController {
 
-    private InstagramUserDAO instagramUserDAO = lookupInstagramUserDAOBean();   
+    ProducerSessionBeanLocal logger = lookupProducerSessionBeanLocal();
+
+    private InstagramUserDAO instagramUserDAO = lookupInstagramUserDAOBean();
     private Restaurant restaurant;
     private InstagramUser instagramUser;
     private Location location;
-    
+
     @Override
     public void execute() {
         String name = request.getParameter("name");
@@ -34,13 +38,9 @@ public class FavoritoInstagramController extends AbstractController {
         String url = request.getParameter("url");
         String city = request.getParameter("city");
         String address = request.getParameter("adrress");
-        
+
         location = new Location(address, city);
         restaurant = new Restaurant(name, image, url, location);
-        
-//        long id = ((InstagramUser) request.getSession().getAttribute("usuario")).getId();
-//        
-//        instagramUser = instagramUserDAO.readById(id);
 
         instagramUser = (InstagramUser) this.request.getSession().getAttribute("usuario");
 
@@ -49,6 +49,7 @@ public class FavoritoInstagramController extends AbstractController {
         instagramUserDAO.update(instagramUser);
 
         returnPage = "user_area/home.jsp";
+        logger.sendMessage("Usuário " + instagramUser.getUserName() + " favoritou o restaurante \"" + restaurant.getName() + "\"");
 
     }
 
@@ -86,6 +87,16 @@ public class FavoritoInstagramController extends AbstractController {
         try {
             Context c = new InitialContext();
             return (InstagramUser) c.lookup("java:global/BRConsulta/BRConsulta-ejb/InstagramUser!br.com.mack.persistence.entities.InstagramUser");
+        } catch (NamingException ne) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
+            throw new RuntimeException(ne);
+        }
+    }
+
+    private ProducerSessionBeanLocal lookupProducerSessionBeanLocal() {
+        try {
+            Context c = new InitialContext();
+            return (ProducerSessionBeanLocal) c.lookup("java:global/BRConsulta/BRConsulta-ejb/ProducerSessionBean!br.com.mack.sessionbeans.ProducerSessionBeanLocal");
         } catch (NamingException ne) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
             throw new RuntimeException(ne);

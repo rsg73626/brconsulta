@@ -10,6 +10,7 @@ import br.com.mack.persistence.CommonUserDAO;
 import br.com.mack.persistence.entities.CommonUser;
 import br.com.mack.persistence.entities.Location;
 import br.com.mack.persistence.entities.Restaurant;
+import br.com.mack.sessionbeans.ProducerSessionBeanLocal;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.Context;
@@ -21,6 +22,8 @@ import javax.naming.NamingException;
  * @author 41583469
  */
 public class FavoritoCommonController extends AbstractController {
+
+    ProducerSessionBeanLocal logger = lookupProducerSessionBeanLocal();
 
     Restaurant restaurant = lookupRestaurantBean();
 
@@ -53,8 +56,7 @@ public class FavoritoCommonController extends AbstractController {
         user.addRestaurant(restaurant);
 
         userDAO.create(user);
-
-        returnPage = "user_area/home.jsp";
+        logger.sendMessage("Usuário " + user.getUserName() + " favoritou o restaurante " + restaurant.getId() + ": \"" + restaurant.getName() + "\"");
 
     }
     private Location lookupLocationBean() {
@@ -91,6 +93,16 @@ public class FavoritoCommonController extends AbstractController {
         try {
             Context c = new InitialContext();
             return (Restaurant) c.lookup("java:global/BRConsulta/BRConsulta-ejb/Restaurant!br.com.mack.persistence.entities.Restaurant");
+        } catch (NamingException ne) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
+            throw new RuntimeException(ne);
+        }
+    }
+
+    private ProducerSessionBeanLocal lookupProducerSessionBeanLocal() {
+        try {
+            Context c = new InitialContext();
+            return (ProducerSessionBeanLocal) c.lookup("java:global/BRConsulta/BRConsulta-ejb/ProducerSessionBean!br.com.mack.sessionbeans.ProducerSessionBeanLocal");
         } catch (NamingException ne) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
             throw new RuntimeException(ne);

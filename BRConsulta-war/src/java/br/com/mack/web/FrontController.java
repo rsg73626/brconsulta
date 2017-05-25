@@ -8,7 +8,6 @@ package br.com.mack.web;
 import br.com.mack.controller.Controller;
 import br.com.mack.controller.ControllerFactory;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "FrontController", urlPatterns = {"/FrontController"})
 public class FrontController extends HttpServlet {
-
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -45,7 +44,7 @@ public class FrontController extends HttpServlet {
             controller.execute();
             page = controller.returnPage();
         }
-
+        
         response.sendRedirect(page);
 
     }

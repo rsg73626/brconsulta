@@ -114,6 +114,13 @@ public abstract class User implements Serializable {
     }
 
     public void setBirthday(String birthday) {
+        if(birthday.contains("/")){
+            String[] dateParts = birthday.split("/");
+            String ano = dateParts[2];
+            String mes = dateParts[1];
+            String dia = dateParts[0];
+            birthday = ano + "-" + mes + "-" + dia;
+        }
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         try {
             this.birthday = df.parse(birthday);

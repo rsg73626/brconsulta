@@ -8,6 +8,8 @@ package br.com.mack.controller.impl;
 import br.com.mack.controller.AbstractController;
 import br.com.mack.persistence.CommonUserDAO;
 import br.com.mack.persistence.entities.CommonUser;
+import br.com.mack.persistence.entities.User;
+import br.com.mack.sessionbeans.ProducerSessionBeanLocal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -22,10 +24,9 @@ import javax.naming.NamingException;
  */
 public class CadastroController extends AbstractController {
 
-    CommonUserDAO commonUserDAO = lookupCommonUserDAOBean();
-    
+    ProducerSessionBeanLocal logger = lookupProducerSessionBeanLocal();
 
-    
+    CommonUserDAO commonUserDAO = lookupCommonUserDAOBean();
 
     @Override
     public void execute() {
@@ -63,10 +64,10 @@ public class CadastroController extends AbstractController {
             erro = true;
             erros.add("Os campos SENHA e CONFIRMAÇÃO DE SENHA devem possuir valores iguais");
         }
-        
+
         CommonUser usuario = commonUserDAO.readByUserName(user.getUserName());
         System.out.println("Fez a busca corretamente!");
-        if(usuario != null){
+        if (usuario != null) {
             erro = true;
             erros.add("Já existe um usuário cadastrado com este NOME DE USUÁRIO");
         }
@@ -75,11 +76,12 @@ public class CadastroController extends AbstractController {
             this.returnPage = "erro.jsp";
             this.request.getSession().setAttribute("errorMessages", erros);
             return;
-        }       
+        }
 
         try {
             commonUserDAO.create(user);
             request.getSession().setAttribute("usuario", user);
+            logger.sendMessage("Usuário " + user.getUserName() + " registrou-se");
         } catch (Exception e) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", e);
             this.request.getSession().setAttribute("errorMessages", new String[]{"Erro interno de Servidor"});
@@ -91,6 +93,16 @@ public class CadastroController extends AbstractController {
         try {
             Context c = new InitialContext();
             return (CommonUserDAO) c.lookup("java:global/BRConsulta/BRConsulta-ejb/CommonUserDAO!br.com.mack.persistence.CommonUserDAO");
+        } catch (NamingException ne) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
+            throw new RuntimeException(ne);
+        }
+    }
+
+    private ProducerSessionBeanLocal lookupProducerSessionBeanLocal() {
+        try {
+            Context c = new InitialContext();
+            return (ProducerSessionBeanLocal) c.lookup("java:global/BRConsulta/BRConsulta-ejb/ProducerSessionBean!br.com.mack.sessionbeans.ProducerSessionBeanLocal");
         } catch (NamingException ne) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
             throw new RuntimeException(ne);

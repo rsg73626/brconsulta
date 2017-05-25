@@ -3,6 +3,7 @@ package br.com.mack.servlet;
 import br.com.mack.parser.InstagramUserJSONParser;
 import br.com.mack.persistence.InstagramUserDAO;
 import br.com.mack.persistence.entities.InstagramUser;
+import br.com.mack.sessionbeans.ProducerSessionBeanLocal;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -24,6 +25,9 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "AuthenticationByInstagram", urlPatterns = {"/AuthenticationByInstagram"})
 public class AuthenticationByInstagram extends HttpServlet {
+
+    @EJB
+    private ProducerSessionBeanLocal logger;
 
     @EJB
     private InstagramUserJSONParser parser;
@@ -103,6 +107,7 @@ public class AuthenticationByInstagram extends HttpServlet {
                 }
                 request.getSession().setAttribute("usuario_instagram", true);
                 request.getRequestDispatcher("user_area/home.jsp").forward(request, response);
+                logger.sendMessage("Usuário " + u.getUserName() + " logado");
             }
         } else {
             error_reason = request.getParameter("error_reason");

@@ -8,6 +8,8 @@ package br.com.mack.controller.impl;
 import br.com.mack.controller.AbstractController;
 import br.com.mack.persistence.CommonUserDAO;
 import br.com.mack.persistence.entities.CommonUser;
+import br.com.mack.persistence.entities.User;
+import br.com.mack.sessionbeans.ProducerSessionBeanLocal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -21,6 +23,8 @@ import javax.naming.NamingException;
  * @author 31595472
  */
 public class UpdateCommonProfileController extends AbstractController {
+
+    ProducerSessionBeanLocal logger = lookupProducerSessionBeanLocal();
 
     CommonUserDAO commonUserDAO = lookupCommonUserDAOBean();
 
@@ -43,6 +47,7 @@ public class UpdateCommonProfileController extends AbstractController {
             commonUserDAO.update(usuario);
 
             this.returnPage = "user_area/profile.jsp";
+            logger.sendMessage("Usuário " + usuario.getUserName() + " alterou dados de perfil");
         } else {
             List<String> erros = new ArrayList();
             if (fullName == null) {
@@ -78,6 +83,16 @@ public class UpdateCommonProfileController extends AbstractController {
         try {
             Context c = new InitialContext();
             return (CommonUserDAO) c.lookup("java:global/BRConsulta/BRConsulta-ejb/CommonUserDAO!br.com.mack.persistence.CommonUserDAO");
+        } catch (NamingException ne) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
+            throw new RuntimeException(ne);
+        }
+    }
+
+    private ProducerSessionBeanLocal lookupProducerSessionBeanLocal() {
+        try {
+            Context c = new InitialContext();
+            return (ProducerSessionBeanLocal) c.lookup("java:global/BRConsulta/BRConsulta-ejb/ProducerSessionBean!br.com.mack.sessionbeans.ProducerSessionBeanLocal");
         } catch (NamingException ne) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
             throw new RuntimeException(ne);
