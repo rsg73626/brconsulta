@@ -1,14 +1,42 @@
-Thu May 25 09:34:14 BRT 2017 : Apache Derby Servidor de Rede - 10.10.2.0 - (1582446) iniciado e pronto para aceitar conexões na porta 1527 em {3}
+
+Thu May 25 09:34:14 BRT 2017 : Apache Derby Servidor de Rede - 10.10.2.0 - (1582446) iniciado e pronto para aceitar conexï¿½es na porta 1527 em {3}
 ----------------------------------------------------------------
+
 Thu May 25 09:34:17 BRT 2017:
- Inicializando o Derby versão The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instância a816c00e-015c-3f99-9f2d-ffff87294755
-no diretório de banco de dados C:\Temp\brconsulta\BRConsulta-ejb\bd\brconsulta 
+ Inicializando o Derby versï¿½o The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instï¿½ncia a816c00e-015c-3f99-9f2d-ffff87294755
+ origin/master
+no diretï¿½rio de banco de dados C:\Temp\brconsulta\BRConsulta-ejb\bd\brconsulta 
 
 java.vendor=Oracle Corporation
 java.runtime.version=1.8.0_101-b13
-user.dir=C:\Temp\glassfish4\glassfish4\javadb
+user.dir=C:\Users\41583469.MACKLABS.007\Downloads\glassfish4\glassfish4\javadb
 os.name=Windows 10
 os.arch=amd64
 os.version=10.0
 derby.system.home=C:\Temp\brconsulta\BRConsulta-ejb\bd
 Carregador de classe do banco de dados iniciado - derby.database.classpath=''
+Thu May 25 09:32:38 BRT 2017 Thread[DRDAConnThread_2,5,main] (XID = 238), (SESSIONID = 0), (DATABASE = brconsulta), (DRDAID = {1}), Cleanup action starting
+java.sql.SQLNonTransientConnectionException: Ocorreu uma falha de autenticaï¿½ï¿½o da conexï¿½o.  Motivo: Autenticaï¿½ï¿½o invï¿½lida..
+	at org.apache.derby.impl.jdbc.SQLExceptionFactory40.getSQLException(Unknown Source)
+	at org.apache.derby.impl.jdbc.Util.newEmbedSQLException(Unknown Source)
+	at org.apache.derby.impl.jdbc.Util.newEmbedSQLException(Unknown Source)
+	at org.apache.derby.impl.jdbc.Util.generateCsSQLException(Unknown Source)
+	at org.apache.derby.impl.jdbc.EmbedConnection.newSQLException(Unknown Source)
+	at org.apache.derby.impl.jdbc.EmbedConnection.checkUserCredentials(Unknown Source)
+	at org.apache.derby.impl.jdbc.EmbedConnection.<init>(Unknown Source)
+	at org.apache.derby.impl.jdbc.EmbedConnection40.<init>(Unknown Source)
+	at org.apache.derby.jdbc.Driver40.getNewEmbedConnection(Unknown Source)
+	at org.apache.derby.jdbc.InternalDriver.connect(Unknown Source)
+	at org.apache.derby.jdbc.Driver20.connect(Unknown Source)
+	at org.apache.derby.jdbc.EmbeddedDriver.connect(Unknown Source)
+	at org.apache.derby.impl.drda.Database.makeConnection(Unknown Source)
+	at org.apache.derby.impl.drda.DRDAConnThread.getConnFromDatabaseName(Unknown Source)
+	at org.apache.derby.impl.drda.DRDAConnThread.verifyUserIdPassword(Unknown Source)
+	at org.apache.derby.impl.drda.DRDAConnThread.parseSECCHK(Unknown Source)
+	at org.apache.derby.impl.drda.DRDAConnThread.parseDRDAConnection(Unknown Source)
+	at org.apache.derby.impl.drda.DRDAConnThread.processCommands(Unknown Source)
+	at org.apache.derby.impl.drda.DRDAConnThread.run(Unknown Source)
+Caused by: java.sql.SQLException: Ocorreu uma falha de autenticaï¿½ï¿½o da conexï¿½o.  Motivo: Autenticaï¿½ï¿½o invï¿½lida..
+	at org.apache.derby.impl.jdbc.SQLExceptionFactory.getSQLException(Unknown Source)
+	at org.apache.derby.impl.jdbc.SQLExceptionFactory40.wrapArgsForTransportAcrossDRDA(Unknown Source)
+	... 19 more origin/master
