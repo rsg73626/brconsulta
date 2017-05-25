@@ -11,7 +11,7 @@
             <input type="submit" value="Buscar">
         </form>
     </article>
-            
+
     <article>
         <c:if test="${restaurants != null}">
             <h:Rest items="${restaurants}" context="${pageContext.request.contextPath}" user="${(usuario_instagram != null)?true:false}"/>            
