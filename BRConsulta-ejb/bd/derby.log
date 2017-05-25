@@ -1,8 +1,8 @@
-Wed May 24 20:00:05 BRT 2017 : Apache Derby Servidor de Rede - 10.10.2.0 - (1582446) iniciado e pronto para aceitar conexões na porta 1527 em {3}
+Thu May 25 09:34:14 BRT 2017 : Apache Derby Servidor de Rede - 10.10.2.0 - (1582446) iniciado e pronto para aceitar conexões na porta 1527 em {3}
 ----------------------------------------------------------------
-Wed May 24 20:00:19 BRT 2017:
- Inicializando o Derby versão The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instância a816c00e-015c-3cb0-4a8b-ffffdf8e101e
-no diretório de banco de dados C:\Temp\Projeto_LP3\brconsulta\BRConsulta-ejb\bd\brconsulta 
+Thu May 25 09:34:17 BRT 2017:
+ Inicializando o Derby versão The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instância a816c00e-015c-3f99-9f2d-ffff87294755
+no diretório de banco de dados C:\Temp\brconsulta\BRConsulta-ejb\bd\brconsulta 
 
 java.vendor=Oracle Corporation
 java.runtime.version=1.8.0_101-b13
@@ -10,22 +10,5 @@ user.dir=C:\Temp\glassfish4\glassfish4\javadb
 os.name=Windows 10
 os.arch=amd64
 os.version=10.0
-derby.system.home=C:\Temp\Projeto_LP3\brconsulta\BRConsulta-ejb\bd
-Carregador de classe do banco de dados iniciado - derby.database.classpath=''
-----------------------------------------------------------------
-Wed May 24 20:00:31 BRT 2017:
-Encerrando a instância a816c00e-015c-3cb0-4a8b-ffffdf8e101e
-Wed May 24 20:00:31 BRT 2017 Thread[DRDAConnThread_2,5,main] (DATABASE = brconsulta), (DRDAID = {2}), Banco de dados 'brconsulta' fechado.
-----------------------------------------------------------------
-Wed May 24 20:00:34 BRT 2017:
- Inicializando o Derby versão The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instância 560740aa-015c-3cb0-4a8b-ffffdf8e101e
-no diretório de banco de dados C:\Temp\Projeto_LP3\brconsulta\BRConsulta-ejb\bd\brconsulta 
-
-java.vendor=Oracle Corporation
-java.runtime.version=1.8.0_101-b13
-user.dir=C:\Temp\glassfish4\glassfish4\javadb
-os.name=Windows 10
-os.arch=amd64
-os.version=10.0
-derby.system.home=C:\Temp\Projeto_LP3\brconsulta\BRConsulta-ejb\bd
+derby.system.home=C:\Temp\brconsulta\BRConsulta-ejb\bd
 Carregador de classe do banco de dados iniciado - derby.database.classpath=''

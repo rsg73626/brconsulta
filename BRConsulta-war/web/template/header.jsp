@@ -173,7 +173,7 @@
         <header>
             <nav>
                 <ul>
-                    <li><a href="index.jsp"><img alt="logo" src="..."/>BRConsulta</a></li>
+                    <li><a href="index.jsp">BRConsulta</a></li>
                     <li><a href="index.jsp">inicio</a></li>
                     <li><a href="signup.jsp">registrar-se</a></li>
                     <li><a href="signin.jsp">login</a></li>

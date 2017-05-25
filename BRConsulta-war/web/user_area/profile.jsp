@@ -4,6 +4,11 @@
 <link href="<c:url value="/css/profile.css"/>" rel="stylesheet" type="text/css"/>
 
 <main>
+
+    <c:if test="${usuario_instagram != null}">
+        <img id="instaphoto" src="${usuario.profilePicture}" alt="Foto de perfil"/>
+    </c:if>
+
     <form action="${pageContext.request.contextPath}/FrontController" method="POST">
         <input type="text" required="required" id="nome_completo" name="nome_completo" value="${usuario.fullName}" title="Nome completo">
 
@@ -22,7 +27,7 @@
 
         <input type="submit" value="ALTERAR">
     </form>
-    <a href="FrontController?ctrl=Unsubscribe">CANCELAR CADASTRO</a>
+    <a href="${pageContext.request.contextPath}/FrontController?ctrl=Unsubscribe">CANCELAR CADASTRO</a>
 </main>
 
 <c:import url="/template/footer.jsp"/>

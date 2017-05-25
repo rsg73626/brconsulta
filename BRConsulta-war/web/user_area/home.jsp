@@ -2,9 +2,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="h" uri="/WEB-INF/tlds/restauranttag"%>
 <c:import url="/template/header_post_login.jsp"/>
-
 <link href="<c:url value="/css/home.css"/>" rel="stylesheet" type="text/css"/>
-
 <section>
     <article>
         <form action="<c:url value="/FrontController"/>" method="POST">
@@ -15,14 +13,8 @@
     </article>
             
     <article>
-        <c:if test="${usuario_instagram != null}">
-            <img id="instaphoto" src="${usuario.profilePicture}" alt="Foto de perfil"/>
-        </c:if>
         <c:if test="${restaurants != null}">
             <h:Rest items="${restaurants}" context="${pageContext.request.contextPath}" user="${(usuario_instagram != null)?true:false}"/>            
         </c:if>
     </article>
-
 </section>
-
-<c:import url="/template/footer.jsp"/>
