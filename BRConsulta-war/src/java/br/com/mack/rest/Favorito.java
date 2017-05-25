@@ -26,6 +26,10 @@ public class Favorito {
     CommonUserDAO commonUserDAO = lookupCommonUserDAOBean();
 
     InstagramUserDAO instagramUserDAO = lookupInstagramUserDAOBean();
+    
+    
+
+    
 
     public Favorito() {
     }

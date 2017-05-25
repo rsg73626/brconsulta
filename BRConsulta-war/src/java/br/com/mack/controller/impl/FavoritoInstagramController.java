@@ -10,7 +10,6 @@ import br.com.mack.persistence.InstagramUserDAO;
 import br.com.mack.persistence.entities.InstagramUser;
 import br.com.mack.persistence.entities.Location;
 import br.com.mack.persistence.entities.Restaurant;
-import br.com.mack.persistence.entities.User;
 import br.com.mack.sessionbeans.ProducerSessionBeanLocal;
 import java.util.logging.Level;
 import java.util.logging.Logger;

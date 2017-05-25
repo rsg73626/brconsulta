@@ -13,11 +13,8 @@
             <input type="submit" value="Buscar">
         </form>
     </article>
-            
+
     <article>
-        <c:if test="${usuario_instagram != null}">
-            <img id="instaphoto" src="${usuario.profilePicture}" alt="Foto de perfil"/>
-        </c:if>
         <c:if test="${restaurants != null}">
             <h:Rest items="${restaurants}" context="${pageContext.request.contextPath}" user="${(usuario_instagram != null)?true:false}"/>            
         </c:if>
