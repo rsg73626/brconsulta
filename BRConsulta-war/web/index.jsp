@@ -13,7 +13,7 @@
 <link href="css/style.css" rel="stylesheet" type="text/css"/>
 <section>
             <article>
-                <img src="..." alt="Ícone/Img representativa">
+                <img src="images/imagem.jpg" style="width:40%; border-radius: 5px;" alt="Ícone/Img representativa">
                 
                 <hgroup>
                     <h1>Título descritivo</h1>

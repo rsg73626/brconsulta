@@ -23,11 +23,14 @@ import javax.naming.NamingException;
  */
 public class UnsubscribeController extends AbstractController{
 
-    ProducerSessionBeanLocal logger = lookupProducerSessionBeanLocal();
+    CommonUserDAO commonUserDAO = lookupCommonUserDAOBean();
 
     InstagramUserDAO instagramUserDAO = lookupInstagramUserDAOBean();
 
-    CommonUserDAO commonUserDAO = lookupCommonUserDAOBean();
+    ProducerSessionBeanLocal logger = lookupProducerSessionBeanLocal();
+    
+
+    
     
     
     
@@ -43,14 +46,15 @@ public class UnsubscribeController extends AbstractController{
             commonUserDAO.delete(usuario);
             userName = usuario.getUserName();
         }
+        this.request.getSession().invalidate();
         logger.sendMessage("Usuário " + userName + " deletou sua conta");
         this.returnPage = "index.jsp";
     }
 
-    private CommonUserDAO lookupCommonUserDAOBean() {
+    private ProducerSessionBeanLocal lookupProducerSessionBeanLocal() {
         try {
             Context c = new InitialContext();
-            return (CommonUserDAO) c.lookup("java:global/BRConsulta/BRConsulta-ejb/CommonUserDAO!br.com.mack.persistence.CommonUserDAO");
+            return (ProducerSessionBeanLocal) c.lookup("java:global/BRConsulta/BRConsulta-ejb/ProducerSessionBean!br.com.mack.sessionbeans.ProducerSessionBeanLocal");
         } catch (NamingException ne) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
             throw new RuntimeException(ne);
@@ -67,14 +71,15 @@ public class UnsubscribeController extends AbstractController{
         }
     }
 
-    private ProducerSessionBeanLocal lookupProducerSessionBeanLocal() {
+    private CommonUserDAO lookupCommonUserDAOBean() {
         try {
             Context c = new InitialContext();
-            return (ProducerSessionBeanLocal) c.lookup("java:global/BRConsulta/BRConsulta-ejb/ProducerSessionBean!br.com.mack.sessionbeans.ProducerSessionBeanLocal");
+            return (CommonUserDAO) c.lookup("java:global/BRConsulta/BRConsulta-ejb/CommonUserDAO!br.com.mack.persistence.CommonUserDAO");
         } catch (NamingException ne) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
             throw new RuntimeException(ne);
         }
     }
+
     
 }
